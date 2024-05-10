@@ -81,7 +81,7 @@ const navigate = useNavigate();
     >
       {" "}
       <Helmet>
-        <title> | Food-Details</title>
+        <title>Surplus Saver | Food-Details</title>
       </Helmet>
       <div className="flex space-x-4 pb-6 root">
         <img

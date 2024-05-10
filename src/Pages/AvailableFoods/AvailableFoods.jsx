@@ -52,7 +52,7 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
   return (
     <div>
       <Helmet>
-        <title> | Available Food</title>
+        <title>Surplus Saver | Available Food</title>
       </Helmet>
       {loading ? <Spinner /> : (
               <div>

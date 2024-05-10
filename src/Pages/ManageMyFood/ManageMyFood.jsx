@@ -55,7 +55,7 @@ const ManageMyFood = () => {
     return (
        <div className="mt-12 md:mt-[80px] p-6 text-center">
       <Helmet>
-        <title>| Manage My Food</title>
+        <title>Surplus Saver | Manage My Food</title>
       </Helmet>
       <div className="max-w-[800px] mx-auto">
         <h2 className="font-bold text-[28px] md:text-[40px] pt-4">

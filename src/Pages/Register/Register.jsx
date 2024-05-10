@@ -43,7 +43,7 @@ const Register = () => {
     return (
         <div>
                <Helmet>
-                <title> | Register</title>
+                <title>Surplus Saver | Register</title>
             </Helmet>
             <div className="flex w-full max-w-sm  mx-auto mt-12 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
                  <div className="w-full max-w-md rounded-md shadow sm:p-8 text-black">

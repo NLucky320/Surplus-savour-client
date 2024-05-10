@@ -161,9 +161,9 @@ const Nav = () => {
             <Typography
               as="a"
               href="#"
-              className="mr-1 md:mr-4 cursor-pointer py-1.5 font-bold pl-2 md:pl-6 text-xl text-[#f9a06f]"
+              className="mr-1 md:mr-2 cursor-pointer py-1.5 font-bold pl-2 md:pl-6 text-xl text-[#f9a06f]"
             >
-           Food For Free
+           Surplus Saver
             </Typography>
           </div>
           <div className="flex items-center gap-4">

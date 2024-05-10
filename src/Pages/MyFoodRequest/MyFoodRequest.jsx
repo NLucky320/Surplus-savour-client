@@ -1,11 +1,12 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+
 
 const MyFoodRequest = () => {
  
     return (
       <div>
-
+<Helmet>  Surplus Saver | My Food Request</Helmet>
     </div>
     );
 };

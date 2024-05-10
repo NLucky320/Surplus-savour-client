@@ -73,7 +73,7 @@ const AddFoodItem = () => {
   return (
     <div className=" mt-12 md:mt-[80px] p-6 text-center ">
       <Helmet>
-        <title> | Add Foods</title>
+        <title>Surplus Saver | Add Foods</title>
       </Helmet>
       <div className="bg-[url('../../assets/wave.svg')]">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -157,7 +157,7 @@ const AddFoodItem = () => {
               </label>
               <label className="input-group">
                 <input
-                  type="text"
+                  type="date"
                   name="expired_date"
                   placeholder="Expired Date"
                   className="input input-bordered w-full"

@@ -10,13 +10,13 @@ const Footer = () => {
                   <div>
                      
                         <h2 className="flex items-center text-2xl gap-2">
-            <span className="text-[#f9a06f]">Food For Free</span>
+            <span className="text-[#f9a06f]">Surplus Saver</span>
        <img src={logo} alt="" className=" w-10 h-10" />
           </h2>
                   </div>
         
           <p>Contact Information - </p>
-          <p>Copyright © <span>{moment().format("YYYY")}. </span>All right reserved by - Food For Free  </p>
+          <p>Copyright © <span>{moment().format("YYYY")}. </span>All right reserved by - Surplus Saver  </p>
           <div className="text-xl mt-2 flex items-center gap-4">
             <a href="https://facebook.com">
               <FaFacebook />
