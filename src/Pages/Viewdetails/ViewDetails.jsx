@@ -145,7 +145,7 @@ const handleRequest = _id => {
                   <span className="absolute bg-[#fac0a1] size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>close</button>
             </div>
    
-        <form onSubmit={handleRequest}>
+        <form >
           {/* form food_name and food_image row */}
           <div className="md:flex mb-2">
             <div className="form-control md:w-1/2">
@@ -328,12 +328,13 @@ const handleRequest = _id => {
               </label>
             </div>
           </div>
-          <input
+          {/* <input
             type="submit"
             value="Request"
             className="btn border-none btn-block bg-black text-white"
-          />
-        </form>
+          /> */}
+              </form>
+              <button  onClick={() => handleRequest(item._id)}  className="btn border-none btn-block bg-black text-white" >request</button>
       </Modal>
     </div>
             </div>
