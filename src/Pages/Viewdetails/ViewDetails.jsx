@@ -1,9 +1,10 @@
 
 import React, { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Modal from 'react-modal';
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 const customStyles = {
   content: {
     top: '57%',
@@ -20,7 +21,7 @@ Modal.setAppElement('#root');
 const ViewDetails = () => {
   let subtitle;
       const [currentDate, setCurrentDate] = useState(new Date());
-
+const navigate = useNavigate();
     // Function to format the date to a string
     const formatDate = date => {
         const year = date.getFullYear();
@@ -54,20 +55,25 @@ const ViewDetails = () => {
   useEffect(() => {
     setItem(initialData);
   }, [initialData]);
-const handleRequest = _id => {
+
+
+  const handleRequest = _id => {
     console.log(_id);
     fetch(`http://localhost:5000/foods/${_id}`, {
-        method: 'DELETE'
+      method: 'DELETE'
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data)
-        if (data.deletedCount > 0) {
-            const remaining = item.filter(food => food._id !== _id);
-            setItem(remaining);
-        }
+      console.log(data)
+      if (data.deletedCount > 0) {
+        const remaining = item.filter(food => food._id !== _id);
+        setItem(remaining);
+        toast.success('Food added to your request')
+       
+      }
+      
     });
-};
+  };
     return (
          <div
       key={foodsItem._id}

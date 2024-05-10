@@ -10,6 +10,7 @@ import AvailableFoods from "../Pages/AvailableFoods/AvailableFoods";
 import AddFoodItem from "../Pages/AddFoodItems/AddFoodItem";
 import ManageMyFood from "../Pages/ManageMyFood/ManageMyFood";
 import UpdateFood from "../Pages/UpdateFood/UpdateFood";
+import MyFoodRequest from "../Pages/MyFoodRequest/MyFoodRequest";
 
 
 
@@ -52,14 +53,10 @@ const router = createBrowserRouter([
             res.json()
           ),
       },
-    //   {
-    //     path: "/allArtsItems/viewDetails/:id",
-    //     element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
-    //     loader: ({ params }) =>
-    //       fetch(`https://assignment-10-server-liart-ten.vercel.app/crafts/${params.id}`).then((res) =>
-    //         res.json()
-    //       ),
-    //   },
+      {
+        path: '/my-food-request',
+        element: <PrivateRoute><MyFoodRequest></MyFoodRequest></PrivateRoute>
+      },
       {
         path: "/view-details/:id",
         element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
@@ -68,22 +65,6 @@ const router = createBrowserRouter([
             res.json()
           ),
       },
-    //   {
-    //     path: "/subcategory/viewDetails/:id",
-    //     element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
-    //     loader: ({ params }) =>
-    //       fetch(`https://assignment-10-server-liart-ten.vercel.app/crafts/${params.id}`).then((res) =>
-    //         res.json()
-    //       ),
-    //   },
-    //   {
-    //     path: "/subcategory/:subcategory_Name",
-    //     element: <PrivateRoute><ArtSubcategory></ArtSubcategory></PrivateRoute>,
-    //   },
-    //   {
-    //     path: "/contactUs",
-    //     element: <ContactUs></ContactUs>
-    //   }
     ],
   },
 ]);
