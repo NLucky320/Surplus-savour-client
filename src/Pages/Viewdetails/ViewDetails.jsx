@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Modal from 'react-modal';
+import Swal from "sweetalert2";
 const customStyles = {
   content: {
     top: '57%',
@@ -17,7 +18,20 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 const ViewDetails = () => {
-   let subtitle;
+  let subtitle;
+      const [currentDate, setCurrentDate] = useState(new Date());
+
+    // Function to format the date to a string
+    const formatDate = date => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    };
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -40,10 +54,20 @@ const ViewDetails = () => {
   useEffect(() => {
     setItem(initialData);
   }, [initialData]);
-  const handleRequest= (event) => {
-    event.preventDefault();
-      
-  };
+const handleRequest = _id => {
+    console.log(_id);
+    fetch(`http://localhost:5000/foods/${_id}`, {
+        method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+        if (data.deletedCount > 0) {
+            const remaining = item.filter(food => food._id !== _id);
+            setItem(remaining);
+        }
+    });
+};
     return (
          <div
       key={foodsItem._id}
@@ -223,7 +247,7 @@ const ViewDetails = () => {
           </div>
           {/* form additional_notes  row */}
           <div className="md:flex mb-2">
-            <div className="form-control w-full ">
+            <div className="form-control w-1/2 ">
               <label className="label">
                 <span className="label-text">Additional notes</span>
               </label>
@@ -237,6 +261,21 @@ const ViewDetails = () => {
                 />
               </label>
             </div>
+            <div className="form-control w-1/2 md:ml-4">
+            <label className="label">
+                <span className="label-text">Request Date</span>
+            </label>
+            <label className="input-group">
+                <input
+                    type="text"
+                    name="request_date"
+                    placeholder="Request Date"
+                    className="input input-bordered w-full"
+                    value={formatDate(currentDate)}
+                    readOnly 
+                />
+            </label>
+        </div>
           </div>
           {/* form name and email row */}
           <div className="md:flex mb-2">
