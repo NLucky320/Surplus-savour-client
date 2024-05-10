@@ -4,24 +4,9 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import "animate.css";
-import useAuth from '../../Hooks/useAuth';
-const FeaturedItemCard = ({ item }) => {
-     const { user } = useAuth();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    photo: "",
-  });
 
-  useEffect(() => {
-    if (user) {
-      setFormData({
-        name: user.displayName || "",
-        email: user.email || "",
-        photo: user.photoURL || "",
-      });
-    }
-  }, [user]);
+const FeaturedItemCard = ({ item }) => {
+   
       useEffect(() => {
     Aos.init({ duration: 700 });
       }, [])
@@ -34,35 +19,35 @@ const FeaturedItemCard = ({ item }) => {
         <div className="relative">
           <img
             className="lg:h-64 md:h-64 rounded-t-lg w-full"
-            src={item.food_image}
+            src={item?.food_image}
             alt=""
           />
           <div className="animate__animated text-sm  py-2 px-3 rounded-3xl animate__slower animate__swing animate__infinite font-medium bg-[#f9a06f] border-[#f9a06f] text-black  absolute top-4 right-6 ">
-            {item.food_name}
+            {item?.food_name}
           </div>
         </div>
         <div className="bg-black text-white rounded-b-lg px-2 py-4 lg:p-4">
           <div className="px-4 space-y-4">
             <h2 className="text-[#f9a06f] truncate max-w-[250px] text-xl font-semibold ">
-              {item.item_name}
+              {item?.item_name}
                 </h2>
                 <div className="flex space-x-4">
-		<img alt="" src={formData.photo} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
+		<img alt="" src={item?.photo} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
 		<div className="text-center items-center flex">
-			<p className="text-sm font-semibold">Name: {formData.name}</p>
+			<p className="text-sm font-semibold"> {item?.name}</p>
 		</div>
 	</div>
             <div className="flex flex-col gap-2 ">
               <p className=" font-semibold truncate max-w-[250px] text-sm ">
                 Food Quantity:{"  "}
                 <span className=" font-normal">
-                   {item.food_quantity}
+                   {item?.food_quantity}
                 </span>
               </p>
               <p className="font-semibold truncate max-w-[250px] text-sm">
               Pickup Location:{" "}
                 <span className=" font-normal">
-                  {item.pickup_location}
+                  {item?.pickup_location}
                 </span>
               </p>
               <div className=" flex items-center gap-1 font-semibold truncate max-w-[250px] text-sm">
@@ -70,7 +55,7 @@ const FeaturedItemCard = ({ item }) => {
                 <div className="flex items-center gap-1">
                   
                   <span className=" font-normal">
-                    {item.expired_date}
+                    {item?.expired_date}
                   </span>
                 </div>
               </div>
@@ -80,7 +65,7 @@ const FeaturedItemCard = ({ item }) => {
                                     Notes:
                         </p>
               <p className=" font-semibold  truncate ">
-                {item.additional_notes}
+                {item?.additional_notes}
               </p>
             </div>
             <div className="flex justify-center">

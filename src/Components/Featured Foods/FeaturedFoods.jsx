@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import FeaturedItemCard from './FeaturedItemCard';
 const FeaturedFoods = () => {
      useEffect(() => {
-    Aos.init({ duration: 700 });
+    Aos.init({ duration: 400 });
   }, []);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);

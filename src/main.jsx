@@ -19,7 +19,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <FirebaseProvider>
          <HelmetProvider>
-      <Toaster></Toaster>
+        <Toaster></Toaster>
+
       <RouterProvider router={router} />
       </HelmetProvider>
  </FirebaseProvider>

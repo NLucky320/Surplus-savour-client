@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import ViewDetails from "../Pages/Viewdetails/ViewDetails";
 import AvailableFoods from "../Pages/AvailableFoods/AvailableFoods";
+import AddFoodItem from "../Pages/AddFoodItems/AddFoodItem";
 
 
 
@@ -29,10 +30,10 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register></Register>,
       },
-    //   {
-    //     path: "/addArtsItem",
-    //     element: <PrivateRoute><AddCraftsItem></AddCraftsItem></PrivateRoute>,
-    //   },
+      {
+        path: "/add-food",
+        element: <PrivateRoute><AddFoodItem></AddFoodItem></PrivateRoute>,
+      },
       {
         path: "/available-foods",
         element: <AvailableFoods></AvailableFoods>,

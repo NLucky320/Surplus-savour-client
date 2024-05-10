@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet-async';
 
 const AvailableFoods = () => {
   useEffect(() => {
-    Aos.init({ duration: 700 });
+    Aos.init({ duration: 400 });
   }, []);
 
   const [items, setItems] = useState([]);
@@ -61,7 +61,7 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
                          <input
               type="text"
               placeholder="Search by food name"
-              className="px-8 py-3 bg-[#f9a06f] text-white rounded"
+              className="px-8 py-3 bg-[#f9a06f] text-white rounded placeholder-white"
               value={searchTerm}
               onChange={handleSearchChange}
             />

@@ -4,25 +4,10 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 import { Helmet } from "react-helmet-async";
-import useAuth from '../../Hooks/useAuth';
+
 
 const ViewDetails = () => {
-    const { user } = useAuth();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    photo: "",
-  });
-
-  useEffect(() => {
-    if (user) {
-      setFormData({
-        name: user.displayName || "",
-        email: user.email || "",
-        photo: user.photoURL || "",
-      });
-    }
-  }, [user]);
+ 
     const foodsItem = useLoaderData();
     return (
          <div
@@ -36,7 +21,7 @@ const ViewDetails = () => {
       <div className="flex space-x-4 pb-6">
         <img
           alt=""
-          src={formData.photo}
+          src={foodsItem?.photo}
           className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500"
         />
         <div className="flex flex-col space-y-1">
@@ -45,9 +30,9 @@ const ViewDetails = () => {
             href="#"
             className="text-sm font-semibold"
           >
-            {formData.name}
+            {foodsItem?.name}
           </a>
-          <span className="text-xs dark:text-gray-600">{formData.email}</span>
+          <span className="text-xs dark:text-gray-600">{foodsItem?.email}</span>
         </div>
       </div>
       <div className="space-y-4 p-4">
