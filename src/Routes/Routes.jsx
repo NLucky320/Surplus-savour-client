@@ -8,6 +8,8 @@ import PrivateRoute from "./PrivateRoute";
 import ViewDetails from "../Pages/Viewdetails/ViewDetails";
 import AvailableFoods from "../Pages/AvailableFoods/AvailableFoods";
 import AddFoodItem from "../Pages/AddFoodItems/AddFoodItem";
+import ManageMyFood from "../Pages/ManageMyFood/ManageMyFood";
+import UpdateFood from "../Pages/UpdateFood/UpdateFood";
 
 
 
@@ -38,18 +40,18 @@ const router = createBrowserRouter([
         path: "/available-foods",
         element: <AvailableFoods></AvailableFoods>,
       },
-    //   {
-    //     path: "/myArt&CraftList",
-    //     element: <PrivateRoute><MyArt></MyArt></PrivateRoute>,
-    //   },
-      // {
-      //   path: "/updateArt/:id",
-      //   element: <PrivateRoute> <UpdateArt></UpdateArt></PrivateRoute>,
-      //   loader: ({ params }) =>
-      //     fetch(`https://assignment-10-server-liart-ten.vercel.app/crafts/${params.id}`).then((res) =>
-      //       res.json()
-      //     ),
-      // },
+      {
+        path: "/manage-my-food",
+        element: <PrivateRoute><ManageMyFood></ManageMyFood></PrivateRoute>,
+      },
+      {
+        path: "/update-food/:id",
+        element: <PrivateRoute><UpdateFood></UpdateFood></PrivateRoute>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/foods/${params.id}`).then((res) =>
+            res.json()
+          ),
+      },
     //   {
     //     path: "/allArtsItems/viewDetails/:id",
     //     element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
