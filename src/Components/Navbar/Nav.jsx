@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 import { Link, NavLink, Navigate } from "react-router-dom";
 
-import logo from "../../assets/cutlery.png";
+import logo from "../../assets/thanksgiving.png";
 
 
 import { Tooltip } from "react-tooltip";
