@@ -1,11 +1,8 @@
 
 import React, { useEffect, useState } from "react";
-
 import { useLoaderData } from "react-router-dom";
-
 import { Helmet } from "react-helmet-async";
 import Modal from 'react-modal';
-import useAuth from "../../Hooks/useAuth";
 const customStyles = {
   content: {
     top: '57%',
@@ -17,6 +14,7 @@ const customStyles = {
   },
 };
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement('#root');
 
 const ViewDetails = () => {
    let subtitle;
@@ -38,21 +36,7 @@ const ViewDetails = () => {
   const foodsItem = useLoaderData();
   const initialData = useLoaderData();
   const [item, setItem] = useState(initialData);
-  const { user } = useAuth();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-  });
 
-  useEffect(() => {
-    if (user) {
-      setFormData({
-        name: user.displayName || "",
-        email: user.email || "",
-        photo: user.photoURL || "",
-      });
-    }
-  }, [user]);
   useEffect(() => {
     setItem(initialData);
   }, [initialData]);
@@ -69,7 +53,7 @@ const ViewDetails = () => {
       <Helmet>
         <title> | Food-Details</title>
       </Helmet>
-      <div className="flex space-x-4 pb-6">
+      <div className="flex space-x-4 pb-6 root">
         <img
           alt=""
           src={foodsItem?.photo}
@@ -265,7 +249,7 @@ const ViewDetails = () => {
                   type="text"
                   name="displayName"
                   placeholder="Name"
-                  value={formData.name}
+                  value={item?.name}
                   className="input input-bordered w-full"
                   readOnly
                 />
@@ -280,7 +264,7 @@ const ViewDetails = () => {
                   type="text"
                   name="email"
                   placeholder="Email"
-                  value={formData.email}
+                        value={item?.email}
                   className="input input-bordered w-full"
                   readOnly
                 />
@@ -297,7 +281,7 @@ const ViewDetails = () => {
                 <input
                   type="text"
                   name="image"
-                  value={formData.photo}
+                  value={item?.photo}
                   placeholder="Image URL"
                   className="input input-bordered w-full"
                   readOnly
