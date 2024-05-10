@@ -6,10 +6,11 @@ import FeaturedFoods from '../../Components/Featured Foods/FeaturedFoods';
 
 
 const Home = () => {
+
     return (
         <div>
            <Helmet>
-              <title>Artistic | Home</title>  
+              <title>| Home</title>  
             </Helmet>
             <Banner></Banner> 
             <FeaturedFoods></FeaturedFoods>

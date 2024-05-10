@@ -55,7 +55,7 @@ const Banner = () => {
                PlateShare is your platform for sharing homemade meals, reducing food waste.
               </p>
               <div className="flex justify-center lg:justify-start mb-2">
-                <a href="#items-s">
+                <a href="#food">
                   <button className="font-bold mt-6 rounded-md px-4 py-2 bg-[#f9a06f] text-white relative overflow-hidden group z-10 hover:text-[#1e1b4b] duration-1000 t">
                     <span className="absolute bg-[#fac0a1] size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all "></span>
                     Explore Now
@@ -100,7 +100,7 @@ const Banner = () => {
                 Inviting you to share your culinary heritage and explore the tastes of others..
               </p>
               <div className="flex justify-center lg:justify-start mb-2">
-                <a href="#items-s">
+                <a href="#food">
                   <button className="font-bold mt-6 rounded-md px-4 py-2 bg-[#f9a06f] text-white relative overflow-hidden group z-10 hover:text-[#1e1b4b] duration-1000">
                    
                     <span className="absolute bg-[#fac0a1] size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>
@@ -136,9 +136,9 @@ const Banner = () => {
                     loop={0}
                     cursor
                     cursorStyle="_"
-                    typeSpeed={50}
-                    deleteSpeed={40}
-                    delaySpeed={1000}
+                    typeSpeed={30}
+                    deleteSpeed={20}
+                    delaySpeed={3000}
                   />
                 </span>
               </p>
@@ -146,7 +146,7 @@ const Banner = () => {
                With FoodFusion, every bite tells a story—what will yours say?
               </p>
               <div className="flex justify-center lg:justify-start mb-2">
-                <a href="#items-s">
+                <a href="#food">
                   <button className="font-bold mt-6 rounded-md px-4 py-2 bg-[#f9a06f] text-white relative overflow-hidden group z-10 hover:text-[#1e1b4b] duration-1000">
                 
                     <span className="absolute bg-[#fac0a1] size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>

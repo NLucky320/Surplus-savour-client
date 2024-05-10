@@ -201,7 +201,7 @@ const Nav = () => {
             {user ? (
               <button
                 onClick={handleSignOut}
-                className="btn bg-primary text-white rounded "
+                className="btn bg-[#f9a06f] text-white rounded "
               >
                 {" "}
                 LogOut

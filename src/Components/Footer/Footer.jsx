@@ -5,7 +5,7 @@ import moment from "moment";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer foot footer-center p-4 bg-black text-[#fff4ed]">
+      <footer className="footer foot footer-center p-4 bg-black text-[#fff4ed] mt-[20px] md:mt-[80px]">
               <aside>
                   <div>
                      
