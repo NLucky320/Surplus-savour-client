@@ -16,7 +16,8 @@ const AvailableFoods = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortOption, setSortOption] = useState('');
+const [sortOption, setSortOption] = useState('');
+const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:5000/foods")
@@ -26,6 +27,9 @@ const AvailableFoods = () => {
         setLoading(false);
       });
   }, []);
+      const toggleLayout = () => {
+    setIsTwoColumnLayout((prevLayout) => !prevLayout);
+  };
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value.toLowerCase());
@@ -70,7 +74,12 @@ const AvailableFoods = () => {
               <option value="asc">Ascending</option>
               <option value="desc">Descending</option>
             </select>
-             
+                <button
+              className="px-8 py-3 bg-[#f9a06f] text-white rounded ml-4"
+              onClick={toggleLayout}
+            >
+              {isTwoColumnLayout ? "Switch to 3 Columns" : "Switch to 2 Columns"}
+            </button>
          
                   </div>
                   <div>
@@ -87,7 +96,7 @@ const AvailableFoods = () => {
                 <h2 className="text-center text-2xl lg:text-4xl font-bold text-black ">
                   <Bounce>Available Foods</Bounce>
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 mt-4 lg:mt-10 px-2 lg:px-6">
+                <div className={`grid ${isTwoColumnLayout ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} gap-6 lg:gap-10 mt-4 lg:mt-10 px-2 lg:px-6`}>
                   {sortedItems.map((item) => (
                   <AvailableItemsCard item={item} key={item._id}></AvailableItemsCard>
                 ))}
