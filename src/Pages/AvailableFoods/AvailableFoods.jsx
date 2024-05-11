@@ -90,7 +90,7 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
               </svg>
             </div>
             <div id="food">
-              <div className="bg-[#f9a06f]">
+              <div className="bg-[#f9a06f] -mt-1">
                 <h2 className="text-center text-2xl lg:text-4xl font-bold text-black ">
                   <Bounce>Available Foods</Bounce>
                 </h2>

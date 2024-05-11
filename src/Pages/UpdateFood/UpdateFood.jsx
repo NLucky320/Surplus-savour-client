@@ -91,7 +91,7 @@ const UpdateFood = () => {
           ></path>
         </svg>
       </div>
-      <div className="bg-[#f9a06f]">
+      <div className="bg-[#f9a06f] -mt-1">
         <div className="max-w-[800px] mx-auto text-black ">
           <h2 className="font-bold text-[28px] md:text-[40px] pt-4">
           Update Food Item
