@@ -10,7 +10,7 @@ import AvailableFoods from "../Pages/AvailableFoods/AvailableFoods";
 import AddFoodItem from "../Pages/AddFoodItems/AddFoodItem";
 import ManageMyFood from "../Pages/ManageMyFood/ManageMyFood";
 import UpdateFood from "../Pages/UpdateFood/UpdateFood";
-import MyFoodRequest from "../Pages/MyFoodRequest/MyFoodRequest";
+import MyFoodRequests from "../Pages/MyFoodRequests/MyFoodRequests";
 
 
 
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/my-food-request',
-        element: <PrivateRoute><MyFoodRequest></MyFoodRequest></PrivateRoute>
+        element: <PrivateRoute><MyFoodRequests></MyFoodRequests></PrivateRoute>
       },
       {
         path: "/view-details/:id",

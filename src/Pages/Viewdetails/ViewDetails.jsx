@@ -23,17 +23,29 @@ const ViewDetails = () => {
   let subtitle;
       const [currentDate, setCurrentDate] = useState(new Date());
   const navigate = useNavigate();
-   const { user } = useAuth() || {};
+  const { user } = useAuth() || {};
+      const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+  });
+
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user.displayName || "",
+        email: user.email || "",
+        photo: user.photoURL || "",
+      });
+    }
+  }, [user]);
     // Function to format the date to a string
     const formatDate = date => {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        const seconds = String(date.getSeconds()).padStart(2, '0');
+  
 
-        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        return `${year}-${month}-${day}`;
     };
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -59,38 +71,46 @@ const ViewDetails = () => {
   }, [initialData]);
 
 
-const handleRequest = async (_id) => {
-  try {
-    const response = await fetch(`http://localhost:5000/foods/${_id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ food_status: "requested" }),
-    });
-
-    if (response.ok) {
-      // Update the food status locally
-      const updatedItems = item.map(item => {
-        if (item._id === _id) {
-          return {
-            ...item,
-            food_status: "requested"
-          };
-        }
-        return item;
-      });
-      setItem(updatedItems);
-
-      toast.success("Food requested successfully");
-    } else {
-      toast.error("Error updating food status");
-    }
-  } catch (error) {
-    console.error("Error requesting food:", error);
-    toast.error("Error requesting food");
+const handleFoodRequest = async e => {
+  e.preventDefault();
+  if (user?.email === foodsItem?.donor?.email) {
+    toast.error('Action not permitted!');
+    return;
   }
-};
+    const form = e.target;
+
+    // Retrieve form data
+    const food_name = form.food_name.value;
+    const pickup_location = form.pickup_location.value;
+    const expired_date = form.expired_date.value;
+  const food_status = 'Requested';
+  const donor_name = form.donor_name.value;
+  const request_date = form.request_date.value;
+  const email=form.user_email.value
+      const foodItem = {
+      food_name,
+      pickup_location,
+      expired_date,
+        food_status,
+        donor_name,
+        request_date,
+      email
+  };
+  fetch("http://localhost:5000/myFoodRequest", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(foodItem),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      
+      });
+  };
+  
+
     return (
          <div
       key={foodsItem._id}
@@ -168,7 +188,7 @@ const handleRequest = async (_id) => {
                   <span className="absolute bg-[#fac0a1] size-36 -left-2 -top-10 rounded-full group-hover:scale-100 scale-0 -z-10 group-hover:duration-700 duration-500 origin-center transform transition-all"></span>close</button>
             </div>
    
-        <form >
+        <form  onSubmit={handleFoodRequest} >
           {/* form food_name and food_image row */}
           <div className="md:flex mb-2">
             <div className="form-control md:w-1/2">
@@ -293,7 +313,7 @@ const handleRequest = async (_id) => {
               <label className="input-group">
                 <input
                   type="email"
-                  name="email"
+                  name="user_email"
                   value={user?.email}
                   placeholder="Email"
                   className="input input-bordered w-full"
@@ -311,7 +331,7 @@ const handleRequest = async (_id) => {
               <label className="input-group">
                 <input
                   type="text"
-                  name="displayName"
+                  name="donor_name"
                   placeholder="Name"
                   value={item?.donor.name}
                   className="input input-bordered w-full"
@@ -353,13 +373,13 @@ const handleRequest = async (_id) => {
               </label>
             </div>
           </div>
-          {/* <input
+          <input
             type="submit"
             value="Request"
             className="btn border-none btn-block bg-black text-white"
-          /> */}
+          />
               </form>
-              <button  onClick={() => handleRequest(item._id)}  className="btn border-none btn-block bg-black text-white" >request</button>
+            
       </Modal>
     </div>
             </div>
