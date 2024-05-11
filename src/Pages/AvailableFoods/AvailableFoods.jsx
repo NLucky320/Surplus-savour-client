@@ -3,8 +3,6 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import Spinner from '../../Components/Spinner/Spinner';
 import { Bounce } from "react-awesome-reveal";
-import { Link } from 'react-router-dom';
-import FeaturedItemCard from '../../Components/Featured Foods/FeaturedItemCard';
 import AvailableItemsCard from './AvailableItemsCard';
 import { Helmet } from 'react-helmet-async';
 
@@ -20,7 +18,7 @@ const [sortOption, setSortOption] = useState('');
 const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/foods")
+   fetch("http://localhost:5000/foods?status=available")
       .then((res) => res.json())
       .then((data) => {
         setItems(data);

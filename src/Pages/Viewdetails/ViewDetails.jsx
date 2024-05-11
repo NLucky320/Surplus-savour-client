@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import Modal from 'react-modal';
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import useAuth from "../../Hooks/useAuth";
 const customStyles = {
   content: {
     top: '57%',
@@ -21,7 +22,8 @@ Modal.setAppElement('#root');
 const ViewDetails = () => {
   let subtitle;
       const [currentDate, setCurrentDate] = useState(new Date());
-const navigate = useNavigate();
+  const navigate = useNavigate();
+   const { user } = useAuth() || {};
     // Function to format the date to a string
     const formatDate = date => {
         const year = date.getFullYear();
@@ -57,23 +59,38 @@ const navigate = useNavigate();
   }, [initialData]);
 
 
-  const handleRequest = _id => {
-    console.log(_id);
-    fetch(`http://localhost:5000/foods/${_id}`, {
-      method: 'DELETE'
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      if (data.deletedCount > 0) {
-        const remaining = item.filter(food => food._id !== _id);
-        setItem(remaining);
-        toast.success('Food added to your request')
-       
-      }
-      
+const handleRequest = async (_id) => {
+  try {
+    const response = await fetch(`http://localhost:5000/foods/${_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ food_status: "requested" }),
     });
-  };
+
+    if (response.ok) {
+      // Update the food status locally
+      const updatedItems = item.map(item => {
+        if (item._id === _id) {
+          return {
+            ...item,
+            food_status: "requested"
+          };
+        }
+        return item;
+      });
+      setItem(updatedItems);
+
+      toast.success("Food requested successfully");
+    } else {
+      toast.error("Error updating food status");
+    }
+  } catch (error) {
+    console.error("Error requesting food:", error);
+    toast.error("Error requesting food");
+  }
+};
     return (
          <div
       key={foodsItem._id}
@@ -86,7 +103,7 @@ const navigate = useNavigate();
       <div className="flex space-x-4 pb-6 root">
         <img
           alt=""
-          src={foodsItem?.photo}
+          src={foodsItem?.donor?.photo}
           className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500"
         />
         <div className="flex flex-col space-y-1">
@@ -95,9 +112,9 @@ const navigate = useNavigate();
             href="#"
             className="text-sm font-semibold"
           >
-            {foodsItem?.name}
+            {foodsItem?.donor?.name}
           </a>
-          <span className="text-xs dark:text-gray-600">{foodsItem?.email}</span>
+          <span className="text-xs dark:text-gray-600">{foodsItem?.donor?.email}</span>
         </div>
       </div>
       <div className="space-y-4 p-4">
@@ -185,18 +202,18 @@ const navigate = useNavigate();
               </label>
             </div>
           </div>
-          {/* form food quantity and pickup location row */}
+          {/* form food id and pickup location row */}
           <div className="md:flex mb-2">
             <div className="form-control md:w-1/2">
               <label className="label">
-                <span className="label-text">Food Quantity</span>
+                <span className="label-text">Food Id</span>
               </label>
               <label className="input-group">
                 <input
                   type="text"
-                  name="food_quantity"
-                                    placeholder="Food Quantity"
-                                     defaultValue={item?.food_quantity}
+                  name="_id"
+                                    placeholder="FoodId"
+                                     defaultValue={item?._id}
                         className="input input-bordered w-full"
                            readOnly
                 />
@@ -251,24 +268,10 @@ const navigate = useNavigate();
               </label>
             </div>
           </div>
-          {/* form additional_notes  row */}
+          {/* form request date and user email row */}
           <div className="md:flex mb-2">
             <div className="form-control w-1/2 ">
               <label className="label">
-                <span className="label-text">Additional notes</span>
-              </label>
-              <label className="input-group">
-                <input
-                  type="text"
-                  name="additional_notes"
-                                    placeholder="Additional notes"
-                                    defaultValue={item?.additional_notes}
-                  className="input input-bordered w-full"
-                />
-              </label>
-            </div>
-            <div className="form-control w-1/2 md:ml-4">
-            <label className="label">
                 <span className="label-text">Request Date</span>
             </label>
             <label className="input-group">
@@ -280,21 +283,37 @@ const navigate = useNavigate();
                     value={formatDate(currentDate)}
                     readOnly 
                 />
-            </label>
+                    </label>
+            </div>
+            <div className="form-control w-1/2 md:ml-4">
+           
+                      <label className="label">
+                <span className="label-text">User Email</span>
+              </label>
+              <label className="input-group">
+                <input
+                  type="email"
+                  name="email"
+                  value={user?.email}
+                  placeholder="Email"
+                  className="input input-bordered w-full"
+                  readOnly
+                />
+                    </label>
         </div>
           </div>
           {/* form name and email row */}
           <div className="md:flex mb-2">
             <div className="form-control md:w-1/2">
               <label className="label">
-                <span className="label-text">Name</span>
+                <span className="label-text">Donor Name</span>
               </label>
               <label className="input-group">
                 <input
                   type="text"
                   name="displayName"
                   placeholder="Name"
-                  value={item?.name}
+                  value={item?.donor.name}
                   className="input input-bordered w-full"
                   readOnly
                 />
@@ -302,34 +321,34 @@ const navigate = useNavigate();
             </div>
             <div className="form-control md:w-1/2 md:ml-4">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text">Donor Email</span>
               </label>
               <label className="input-group">
                 <input
                   type="text"
                   name="email"
                   placeholder="Email"
-                        value={item?.email}
+                        value={item?.donor.email}
                   className="input input-bordered w-full"
                   readOnly
                 />
               </label>
             </div>
           </div>
-          {/* form Photo url row */}
+          {/* form additional row */}
           <div className="mb-2">
             <div className="form-control w-full">
-              <label className="label">
-                <span className="label-text">Image URL</span>
+            
+                     <label className="label">
+                <span className="label-text">Additional notes</span>
               </label>
               <label className="input-group">
                 <input
                   type="text"
-                  name="image"
-                  value={item?.photo}
-                  placeholder="Image URL"
+                  name="additional_notes"
+                                    placeholder="Additional notes"
+                                    defaultValue={item?.additional_notes}
                   className="input input-bordered w-full"
-                  readOnly
                 />
               </label>
             </div>

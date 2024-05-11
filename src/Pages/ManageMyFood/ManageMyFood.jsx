@@ -75,6 +75,7 @@ const ManageMyFood = () => {
             <th >Food Image</th>
             <th >Food Name</th>
             <th>Food Quantity</th>
+            <th>Food Status</th>
             <th></th>
             <th></th>
           </tr>
@@ -98,6 +99,7 @@ const ManageMyFood = () => {
                 </td>
                 <td >{item?.food_name}</td>
                 <td> {item?.food_quantity}</td>
+                <td> {item?.food_status}</td>
                 <td>   <Link to={`/update-food/${item._id}`}> <button className="btn bg-[#f9a06f] text-white">Update</button></Link></td>
                 <td> <button onClick={() => handleDelete(item._id)} className="btn bg-[#f9a06f] text-white">Delete</button>
                 </td>

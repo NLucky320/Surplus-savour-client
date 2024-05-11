@@ -32,9 +32,9 @@ const FeaturedItemCard = ({ item }) => {
               {item?.item_name}
                 </h2>
                 <div className="flex space-x-4">
-		<img alt="" src={item?.photo} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
+		<img alt="" src={item?.donor?.photo} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
 		<div className="text-center items-center flex">
-			<p className="text-sm font-semibold"> {item?.name}</p>
+			<p className="text-sm font-semibold"> {item?.donor.name}</p>
 		</div>
 	</div>
             <div className="flex flex-col gap-2 ">

@@ -31,9 +31,7 @@ const AddFoodItem = () => {
     const additional_notes = form.additional_notes.value;
     const food_status = form.food_status.value || "available";
     const food_image = form.food_image.value;
-    const name = formData.name;
-    const email = formData.email;
-    const photo = formData.photo;
+    
 
     const newFoodItem = {
       food_name,
@@ -43,9 +41,11 @@ const AddFoodItem = () => {
       additional_notes,
       food_status,
       food_image,
-      name,
-      email,
-      photo,
+      donor: {
+      name : formData.name,
+   email : formData.email,
+    photo : formData.photo,
+    }
     };
     // console.log(newFoodItem );
     form.reset();
