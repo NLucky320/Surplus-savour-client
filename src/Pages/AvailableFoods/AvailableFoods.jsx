@@ -64,7 +64,7 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
               onChange={handleSearchChange}
             />
             <select
-              className="ml-4 px-8 py-3 bg-[#f9a06f] text-white rounded mt-4"
+              className="sm:ml-8 px-8 py-3 bg-[#f9a06f] text-white rounded mt-4"
               onChange={handleSortChange}
               value={sortOption}
             >
@@ -73,7 +73,7 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
               <option value="desc">Descending</option>
             </select>
                 <button
-              className="px-8 py-3 bg-[#f9a06f] text-white rounded ml-4"
+              className="sm:ml-8 px-8 py-3 bg-[#f9a06f] text-white rounded mt-4"
               onClick={toggleLayout}
             >
               {isTwoColumnLayout ? "Switch to 3 Columns" : "Switch to 2 Columns"}
@@ -94,7 +94,7 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
                 <h2 className="text-center text-2xl lg:text-4xl font-bold text-black ">
                   <Bounce>Available Foods</Bounce>
                 </h2>
-                <div className={`grid ${isTwoColumnLayout ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} gap-6 lg:gap-10 mt-4 lg:mt-10 px-2 lg:px-6`}>
+                <div className={`grid ${isTwoColumnLayout ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} max-w-[1170px] mx-auto  gap-6 lg:gap-10 mt-4 lg:mt-10 px-2 lg:px-6`}>
                   {sortedItems.map((item) => (
                   <AvailableItemsCard item={item} key={item._id}></AvailableItemsCard>
                 ))}

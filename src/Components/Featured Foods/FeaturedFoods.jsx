@@ -25,7 +25,7 @@ const FeaturedFoods = () => {
         <div>
             {(loading && <Spinner />) || (
              <div>
-                   <div className="bg-[url('../../assets/wave.svg')]">
+                   <div className="bg-[url('../../assets/wave.svg')] ">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                 <path
                   fill="#f9a06f"
@@ -34,11 +34,11 @@ const FeaturedFoods = () => {
               </svg>
             </div>
             <div id="food">
-              <div className="bg-[#f9a06f]">
+              <div className="bg-[#f9a06f] -mt-1">
                 <h2 className="text-center text-2xl lg:text-4xl font-bold text-black ">
                   <Bounce>Featured Foods</Bounce>
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 mt-4 lg:mt-10 px-2 lg:px-6">
+                <div className="max-w-[1170px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 mt-4 lg:mt-10 px-2 lg:px-6">
                   {limitedItems.map((item) => (
                     <FeaturedItemCard item={item} key={item._id}></FeaturedItemCard>
                   ))}

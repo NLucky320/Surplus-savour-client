@@ -79,9 +79,9 @@ const UpdateFood = () => {
       });
   };
     return (
-       <div className=" mt-12 md:mt-[80px] p-6 text-center ">
+       <div className="mt-6 py-4 text-center ">
       <Helmet>
-        <title> | Add Foods</title>
+        <title>Surplus Saver | Add Foods</title>
       </Helmet>
       <div className="bg-[url('../../assets/wave.svg')]">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -91,14 +91,15 @@ const UpdateFood = () => {
           ></path>
         </svg>
       </div>
-      <div className="bg-[#f9a06f] p-4">
+      <div className="bg-[#f9a06f]">
         <div className="max-w-[800px] mx-auto text-black ">
           <h2 className="font-bold text-[28px] md:text-[40px] pt-4">
           Update Food Item
           </h2>
           <p className="py-4"> </p>
         </div>
-        <form onSubmit={handleUpdateFoodItem}>
+          <div className="max-w-[1170px] mx-auto p-4">
+             <form onSubmit={handleUpdateFoodItem}>
           {/* form food_name and food_image row */}
           <div className="md:flex mb-8">
             <div className="form-control md:w-1/2">
@@ -266,6 +267,7 @@ const UpdateFood = () => {
             className="btn border-none btn-block bg-black text-white"
           />
         </form>
+       </div>
       </div>
     </div>
     );

@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Banner from '../../Components/Banner/Banner';
 import FeaturedFoods from '../../Components/Featured Foods/FeaturedFoods';
 import Testimonial from '../../Components/Testimonials/Testimonial';
+import OurLocation from '../../Components/OurLocation/OurLocation';
 
 
 
@@ -13,9 +14,14 @@ const Home = () => {
            <Helmet>
               <title>Surplus Saver | Home</title>  
             </Helmet>
-            <Banner></Banner> 
+            <div className='max-w-[1170px] mx-auto'>
+                <Banner></Banner> 
+            </div>
             <FeaturedFoods></FeaturedFoods>
-            <Testimonial></Testimonial>
+            <div className='max-w-[1170px] mx-auto'>
+                <Testimonial></Testimonial>
+                <OurLocation></OurLocation>
+          </div>
 
         </div>
     );

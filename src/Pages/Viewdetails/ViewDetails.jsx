@@ -126,6 +126,7 @@ const ViewDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+          toast.success("Food request added successfully!");
       })
       .catch((error) => {
         console.error("Error adding food request:", error);

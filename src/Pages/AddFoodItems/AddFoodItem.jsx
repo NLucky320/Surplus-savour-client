@@ -71,7 +71,7 @@ const AddFoodItem = () => {
   };
 
   return (
-    <div className=" mt-12 md:mt-[80px] p-6 text-center ">
+    <div className=" mt-6 py-6 text-center ">
       <Helmet>
         <title>Surplus Saver | Add Foods</title>
       </Helmet>
@@ -83,14 +83,15 @@ const AddFoodItem = () => {
           ></path>
         </svg>
       </div>
-      <div className="bg-[#f9a06f] p-4">
+      <div className="bg-[#f9a06f] ">
         <div className="max-w-[800px] mx-auto text-black ">
           <h2 className="font-bold text-[28px] md:text-[40px] pt-4">
             Add Food Item
           </h2>
           <p className="py-4"> </p>
         </div>
-        <form onSubmit={handleAddFoodItem}>
+        <div className="max-w-[1170px] mx-auto py-4">
+          <form onSubmit={handleAddFoodItem}>
           {/* form food_name and food_image row */}
           <div className="md:flex mb-8">
             <div className="form-control md:w-1/2">
@@ -252,6 +253,7 @@ const AddFoodItem = () => {
             className="btn border-none btn-block bg-black text-white"
           />
         </form>
+        </div>
       </div>
     </div>
   );

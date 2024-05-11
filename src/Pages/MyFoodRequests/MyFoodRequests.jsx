@@ -19,7 +19,7 @@ const MyFoodRequests = () => {
     }, [user]);
 
   return (
-      <div className="mt-12 md:mt-[80px] p-6 text-center">
+      <div className="mt-12 md:mt-[80px] p-6 text-center max-w-[1170px] mx-auto">
       <Helmet>
         <title>Surplus Saver | Manage My Food</title>
       </Helmet>
