@@ -50,7 +50,7 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
   return (
     <div>
       <Helmet>
-        <title>Surplus Saver | Available Food</title>
+        <title>Surplus Saver | Available Foods</title>
       </Helmet>
       {loading ? <Spinner /> : (
               <div>
@@ -73,7 +73,7 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
               <option value="desc">Descending</option>
             </select>
                 <button
-              className="sm:ml-8 px-8 py-3 bg-[#f9a06f] text-white rounded mt-4"
+              className="ml-3 md:ml-8 px-8 py-3 bg-[#f9a06f] text-white rounded mt-4"
               onClick={toggleLayout}
             >
               {isTwoColumnLayout ? "Switch to 3 Columns" : "Switch to 2 Columns"}

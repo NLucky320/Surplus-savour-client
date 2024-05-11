@@ -73,7 +73,7 @@ const AddFoodItem = () => {
   return (
     <div className=" mt-6 py-6 text-center ">
       <Helmet>
-        <title>Surplus Saver | Add Foods</title>
+        <title>Surplus Saver | Add Food</title>
       </Helmet>
       <div className="bg-[url('../../assets/wave.svg')]">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">

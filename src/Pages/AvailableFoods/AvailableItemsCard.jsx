@@ -9,7 +9,7 @@ import "animate.css";
 const AvailableItemsCard = ({item}) => {
    
       useEffect(() => {
-    Aos.init({ duration: 700 });
+    Aos.init({ duration: 500 });
       }, [])
     
     return (

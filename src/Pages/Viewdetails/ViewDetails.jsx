@@ -139,7 +139,7 @@ const ViewDetails = () => {
       className="items-center max-w-xl mx-auto p-4 shadow-md mt-12 md:mt-[80px]"
     >
       <Helmet>
-        <title>Surplus Saver | Food-Details</title>
+        <title>Surplus Saver | Food Details</title>
       </Helmet>
       <div className="flex space-x-4 pb-6 root">
         <img
