@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import login from '../../assets/login.json'
 import toast, { Toaster } from 'react-hot-toast';
 import { Helmet } from 'react-helmet-async';
-
 import useAuth from '../../Hooks/useAuth';
 import SocialLogin from './SocialLogin';
 import Lottie from 'lottie-react';
+import Spinner from '../../Components/Spinner/Spinner';
 const Login = () => {
-    const { signInUser } = useAuth();
+    const { signInUser, user,loading } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location?.state || '/';
+
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    })
 
     const {
         register,
@@ -38,6 +44,7 @@ const Login = () => {
             });
     };
 
+    if (user || loading) return;
     return (
         <div>
             <div className="flex w-full max-w-sm  mx-auto mt-12 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">

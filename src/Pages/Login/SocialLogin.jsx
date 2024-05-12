@@ -2,16 +2,21 @@ import toast, { Toaster } from "react-hot-toast";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import { useEffect } from "react";
 
 const SocialLogin = () => {
-  const { googleLogin, githubLogin } = useAuth();
+  const { googleLogin, githubLogin, user,loading } = useAuth();
 
   //navigation
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state || "/";
   // console.log(location)
-
+  useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    })
   const handleSocialLogin = (socialProvider) => {
     socialProvider()
       .then((result) => {
@@ -25,7 +30,7 @@ const SocialLogin = () => {
         console.log(error.message);
       });
   };
-
+if (user || loading) return;
   return (
     <div className="my-2 space-y-2 px-8">
       <hr className="w-full dark:text-gray-600" />

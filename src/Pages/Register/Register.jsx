@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import registration from '../../assets/registration.json'
@@ -9,12 +9,16 @@ import { IoMdEyeOff } from "react-icons/io";
 import useAuth from '../../Hooks/useAuth';
 import Lottie from 'lottie-react';
 const Register = () => {
-    const { createUser, updateUserProfile } = useAuth();
+    const { createUser, updateUserProfile,user,loading } = useAuth();
     const navigate = useNavigate();
     const from = '/';
 
     const [showPassword, setShowPassword] = useState(false);
-
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    })
     const {
         register,
         handleSubmit,
@@ -39,7 +43,7 @@ const Register = () => {
                 console.log(error.message);
             });
     };
-
+if (user || loading) return;
     return (
         <div>
                <Helmet>
