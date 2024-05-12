@@ -10,7 +10,7 @@ const MyFoodRequests = () => {
      const { user } = useAuth() || {};
         useEffect(() => {
         setLoading(true)
-        fetch(`http://localhost:5000/myFoodRequest/${user?.email}`)
+        fetch(`${import.meta.env.VITE_API_URL}/myFoodRequest/${user?.email}`)
             .then((res) => res.json())
             .then((data) => {
                 setItems(data);

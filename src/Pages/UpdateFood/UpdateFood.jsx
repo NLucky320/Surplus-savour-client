@@ -49,7 +49,7 @@ const UpdateFood = () => {
     };
 
     fetch(
-      `http://localhost:5000/foods/${item._id}`,
+      `${import.meta.env.VITE_API_URL}/foods/${item._id}`,
       {
         method: "PUT",
         headers: {

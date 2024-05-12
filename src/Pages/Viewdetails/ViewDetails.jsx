@@ -98,7 +98,7 @@ const ViewDetails = () => {
       email
   };
     // Send a PATCH request to update the food status to "Requested"
-    fetch(`http://localhost:5000/foods/${food_id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/foods/${food_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -116,7 +116,7 @@ const ViewDetails = () => {
       });
 
     // Send a POST request to add the food request to myFoodRequest collection
-    fetch("http://localhost:5000/myFoodRequest", {
+    fetch(`${import.meta.env.VITE_API_URL}/myFoodRequest`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

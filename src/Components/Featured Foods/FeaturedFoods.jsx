@@ -14,7 +14,7 @@ const FeaturedFoods = () => {
   const limit = 6; // Number of items to show
   const limitedItems = items.slice(0, limit);
   useEffect(() => {
-    fetch("http://localhost:5000/foods")
+    fetch(`${import.meta.env.VITE_API_URL}/foods`)
       .then((res) => res.json())
       .then((data) => {
         setItems(data);

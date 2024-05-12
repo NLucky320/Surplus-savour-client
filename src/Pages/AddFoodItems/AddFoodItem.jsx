@@ -49,7 +49,7 @@ const AddFoodItem = () => {
     };
     // console.log(newFoodItem );
     form.reset();
-    fetch("http://localhost:5000/foods", {
+    fetch(`${import.meta.env.VITE_API_URL}/foods`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

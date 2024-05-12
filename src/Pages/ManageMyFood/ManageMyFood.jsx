@@ -11,7 +11,7 @@ const ManageMyFood = () => {
      const { user } = useAuth() || {};
         useEffect(() => {
         setLoading(true)
-        fetch(`http://localhost:5000/myFood/${user?.email}`)
+        fetch(`${import.meta.env.VITE_API_URL}/myFood/${user?.email}`)
             .then((res) => res.json())
             .then((data) => {
                 setItems(data);
@@ -31,7 +31,7 @@ const ManageMyFood = () => {
         })
             .then(result => {
                 if (result.isConfirmed) {
-                    fetch(`http://localhost:5000/foods/${_id}`, {
+                    fetch(`${import.meta.env.VITE_API_URL}/foods/${_id}`, {
                         method: 'DELETE'
                     })
                         .then(res => res.json())

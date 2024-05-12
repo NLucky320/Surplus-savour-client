@@ -18,7 +18,7 @@ const [sortOption, setSortOption] = useState('');
 const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
 
   useEffect(() => {
-   fetch("http://localhost:5000/foods?status=available")
+   fetch(`${import.meta.env.VITE_API_URL}/foods?status=available`)
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
