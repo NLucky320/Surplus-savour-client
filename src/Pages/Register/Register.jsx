@@ -8,8 +8,9 @@ import { FaEye } from "react-icons/fa";
 import { IoMdEyeOff } from "react-icons/io";
 import useAuth from '../../Hooks/useAuth';
 import Lottie from 'lottie-react';
+import axios from 'axios';
 const Register = () => {
-    const { createUser, updateUserProfile,user,loading } = useAuth();
+    const { createUser, updateUserProfile,user,loading, setUser } = useAuth();
     const navigate = useNavigate();
     const from = '/';
 
@@ -25,24 +26,29 @@ const Register = () => {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => {
-        const { email, password, yourName, photoURL } = data;
-        createUser(email, password)
-            .then(() => {
+    const onSubmit =async (info) => {
+        const { email, password, yourName, photoURL } = info;
+    
+        try {
+                const result= await     createUser(email, password)
                 // Register successful, update user profile
-                updateUserProfile(yourName, photoURL)
-                    .then(() => {
-                        navigate(from);
-                        toast.success('Registered successfully');
-                    })
-                    .catch((error) => {
-                        console.log(error.message);
-                    });
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
-    };
+            await updateUserProfile(yourName, photoURL)
+                 setUser({ ...result?.user, photoURL: photoURL, displayName: yourName })
+           const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
+      )
+      console.log(data)
+      navigate(from, { replace: true })
+      toast.success('Signup Successful')
+    } catch (err) {
+      console.log(err)
+      toast.error(err?.message)
+    }
+  }
 if (user || loading) return;
     return (
         <div>

@@ -2,22 +2,25 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import Spinner from "../../Components/Spinner/Spinner";
 import { Helmet } from "react-helmet-async";
+import axios from 'axios';
 
 const MyFoodRequests = () => {
+    const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const { user } = useAuth() || {};
 
-  const [items, setItems] = useState([]);
-          const [loading, setLoading]=useState(true)
-     const { user } = useAuth() || {};
-        useEffect(() => {
-        setLoading(true)
-        fetch(`${import.meta.env.VITE_API_URL}/myFoodRequest/${user?.email}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setItems(data);
-                    setLoading(false)
+    useEffect(() => {
+        setLoading(true);
+        axios.get(`${import.meta.env.VITE_API_URL}/myFoodRequest/${user?.email}`)
+            .then((response) => {
+                setItems(response.data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+                setLoading(false);
             });
     }, [user]);
-
   return (
       <div className="mt-12 md:mt-[80px] p-6 text-center max-w-[1170px] mx-auto">
       <Helmet>

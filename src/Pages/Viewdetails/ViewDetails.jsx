@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
-
+import axios from 'axios';
 const customStyles = {
   content: {
     top: '57%',
@@ -126,7 +126,8 @@ const ViewDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-          toast.success("Food request added successfully!");
+        toast.success("Food request added successfully!");
+        navigate('/my-food-request')
       })
       .catch((error) => {
         console.error("Error adding food request:", error);

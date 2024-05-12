@@ -3,7 +3,7 @@ import auth from '../Firebase/Firebase.config';
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile, } from 'firebase/auth';
 import toast from 'react-hot-toast';
 import { Navigate } from 'react-router-dom';
-
+import axios from 'axios'
 //social auth provider
 
 const googleProvider = new GoogleAuthProvider();
@@ -39,8 +39,12 @@ const FirebaseProvider = ({ children }) => {
     }
 
     //log out
-    const logOut = () => {
-        toast.success('Log out successfully')
+  const logOut = async () => {
+         const { data } = await axios(`${import.meta.env.VITE_API_URL}/logout`, {
+      withCredentials: true,
+    })
+    toast.success('Log out successfully')
+    
         setUser(null)
         setLoading(false)
         signOut(auth)
@@ -84,7 +88,8 @@ const FirebaseProvider = ({ children }) => {
         logOut,
         user,
         loading,
-        updateUserProfile,
+      updateUserProfile,
+            setUser,
 }
 
     return (

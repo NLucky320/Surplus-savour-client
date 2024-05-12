@@ -3,9 +3,10 @@ import toast, { Toaster } from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useEffect } from "react";
+import axios from "axios";
 
 const SocialLogin = () => {
-  const { googleLogin, githubLogin, user,loading } = useAuth();
+  const { googleLogin, githubLogin, user, loading } = useAuth();
 
   //navigation
   const navigate = useNavigate();
@@ -13,31 +14,82 @@ const SocialLogin = () => {
   const from = location?.state || "/";
   // console.log(location)
   useEffect(() => {
-        if (user) {
-            navigate('/')
-        }
-    })
-  const handleSocialLogin = (socialProvider) => {
-    socialProvider()
-      .then((result) => {
-        if (result.user) {
-          navigate(from);
-          toast.success("logged in successfully");
-          // console.log(result.user)
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    if (user) {
+      navigate("/");
+    }
+  });
+
+  //  const handleSocialLogin = async (socialProvider) => {
+  //         try {
+  //             const result = await socialProvider();
+  //             const { data } = await axios.post(`${import.meta.VITE_API_URL}/jwt`, {
+  //                 email: result?.user?.email
+  //             });
+  //             if (data.success) {
+  //                 localStorage.setItem('token', data.token);
+  //                 navigate(from);
+  //                 toast.success('Logged in successfully');
+  //             } else {
+  //                 toast.error('Failed to generate JWT token');
+  //             }
+  //         } catch (error) {
+  //             console.error(error.message);
+  //             toast.error('Error during social login');
+  //         }
+  //     };
+  const handleGoogleSignIn = async () => {
+    try {
+      // 1. google sign in from firebase
+      const result = await googleLogin();
+      console.log(result.user);
+
+      //2. get token from server using email
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
+      toast.success("Signin Successful");
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
+    }
   };
-if (user || loading) return;
+  const handleGithubSignIn = async () => {
+    try {
+      // 1. google sign in from firebase
+      const result = await githubLogin();
+      console.log(result.user);
+
+      //2. get token from server using email
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
+      toast.success("Signin Successful");
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
+    }
+  };
+
+  if (user || loading) return;
   return (
     <div className="my-2 space-y-2 px-8">
       <hr className="w-full dark:text-gray-600" />
       <p className="px-3 dark:text-gray-600 text-center">OR</p>
       <hr className="w-full dark:text-gray-600" />
       <button
-        onClick={() => handleSocialLogin(googleLogin)}
+        onClick={handleGoogleSignIn}
         aria-label="Login with Google"
         type="button"
         className="flex bg-[#f9a06f] max-w text-white items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600"
@@ -53,7 +105,7 @@ if (user || loading) return;
         <p>Login with Google</p>
       </button>
       <button
-        onClick={() => handleSocialLogin(githubLogin)}
+        onClick={handleGithubSignIn}
         aria-label="Login with GitHub"
         role="button"
         className=" bg-[#f9a06f] text-white flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600"

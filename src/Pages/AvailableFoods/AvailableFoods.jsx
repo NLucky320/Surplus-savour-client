@@ -5,6 +5,7 @@ import Spinner from '../../Components/Spinner/Spinner';
 import { Bounce } from "react-awesome-reveal";
 import AvailableItemsCard from './AvailableItemsCard';
 import { Helmet } from 'react-helmet-async';
+import axios from 'axios';
 
 const AvailableFoods = () => {
   useEffect(() => {
@@ -14,19 +15,26 @@ const AvailableFoods = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-const [sortOption, setSortOption] = useState('');
-const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
+  const [sortOption, setSortOption] = useState('');
+  const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
 
   useEffect(() => {
-   fetch(`${import.meta.env.VITE_API_URL}/foods?status=available`)
-      .then((res) => res.json())
-      .then((data) => {
-        setItems(data);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/foods?status=available`);
+        setItems(response.data);
         setLoading(false);
-      });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
-      const toggleLayout = () => {
-    setIsTwoColumnLayout((prevLayout) => !prevLayout);
+
+  const toggleLayout = () => {
+    setIsTwoColumnLayout(prevLayout => !prevLayout);
   };
 
   const handleSearchChange = (e) => {
@@ -44,8 +52,8 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
   const sortedItems = sortOption === 'asc'
     ? filteredItems.slice().sort((a, b) => new Date(a.expired_date) - new Date(b.expired_date))
     : sortOption === 'desc'
-      ? filteredItems.slice().sort((a, b) => new Date(b.expired_date) - new Date(a.expired_date))
-      : filteredItems;
+    ? filteredItems.slice().sort((a, b) => new Date(b.expired_date) - new Date(a.expired_date))
+    : filteredItems;
 
   return (
     <div>
@@ -53,10 +61,9 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
         <title>Surplus Saver | Available Foods</title>
       </Helmet>
       {loading ? <Spinner /> : (
-              <div>
-                  
-                  <div className="py-14 text-center">
-                         <input
+        <div>
+          <div className="py-14 text-center">
+            <input
               type="text"
               placeholder="Search by food name"
               className="px-8 py-3 bg-[#f9a06f] text-white rounded placeholder-white"
@@ -72,16 +79,15 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
               <option value="asc">Ascending</option>
               <option value="desc">Descending</option>
             </select>
-                <button
+            <button
               className="ml-3 md:ml-8 px-8 py-3 bg-[#f9a06f] text-white rounded mt-4"
               onClick={toggleLayout}
             >
               {isTwoColumnLayout ? "Switch to 3 Columns" : "Switch to 2 Columns"}
             </button>
-         
-                  </div>
-                  <div>
-                   <div className="bg-[url('../../assets/wave.svg')]">
+          </div>
+          <div>
+            <div className="bg-[url('../../assets/wave.svg')]">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                 <path
                   fill="#f9a06f"
@@ -96,8 +102,8 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
                 </h2>
                 <div className={`grid ${isTwoColumnLayout ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} max-w-[1170px] mx-auto  gap-6 lg:gap-10 mt-4 lg:mt-10 px-2 lg:px-6`}>
                   {sortedItems.map((item) => (
-                  <AvailableItemsCard item={item} key={item._id}></AvailableItemsCard>
-                ))}
+                    <AvailableItemsCard item={item} key={item._id}></AvailableItemsCard>
+                  ))}
                 </div>
               </div>
             </div>
@@ -106,10 +112,8 @@ const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
                 fill="#f9a06f"
                 d="M0,128L34.3,138.7C68.6,149,137,171,206,149.3C274.3,128,343,64,411,42.7C480,21,549,43,617,69.3C685.7,96,754,128,823,128C891.4,128,960,96,1029,112C1097.1,128,1166,192,1234,208C1302.9,224,1371,192,1406,176L1440,160L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"
               ></path>
-            </svg>   
-             </div>
-            
-           
+            </svg>
+          </div>
         </div>
       )}
     </div>

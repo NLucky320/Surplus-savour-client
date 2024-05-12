@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-
+        import axios from 'axios';
 const AddFoodItem = () => {
   const { user } = useAuth();
   const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ const AddFoodItem = () => {
       });
     }
   }, [user]);
-  const handleAddFoodItem = (event) => {
+  const handleAddFoodItem =async (event) => {
     event.preventDefault();
     const form = event.target;
 
@@ -49,26 +49,50 @@ const AddFoodItem = () => {
     };
     // console.log(newFoodItem );
     form.reset();
-    fetch(`${import.meta.env.VITE_API_URL}/foods`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newFoodItem),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        if (data.insertedId) {
-          Swal.fire({
-            title: "Success!",
-            text: "Food item added successfully",
-            icon: "success",
-            confirmButtonText: "Cool",
-          });
-        }
+    // fetch(`${import.meta.env.VITE_API_URL}/foods`, {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(newFoodItem),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     // console.log(data);
+    //     if (data.insertedId) {
+    //       Swal.fire({
+    //         title: "Success!",
+    //         text: "Food item added successfully",
+    //         icon: "success",
+    //         confirmButtonText: "Cool",
+    //       });
+    //     }
+    //     });
+    
+ try {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/foods`, newFoodItem, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
-  };
+
+      const data = response.data;
+      if (data.insertedId) {
+        Swal.fire({
+          title: "Success!",
+          text: "Food item added successfully",
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
+      }
+    } catch (error) {
+      console.error('Error adding new food item:', error.message);
+      // Handle error here
+    }
+
+
+    };
+    
 
   return (
     <div className=" mt-6 py-6 text-center ">

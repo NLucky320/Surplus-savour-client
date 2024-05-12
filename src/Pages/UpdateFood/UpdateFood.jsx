@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useLoaderData, useNavigate} from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
+import axios from "axios";
+
 const UpdateFood = () => {
-    const initialData = useLoaderData();
-       const navigate = useNavigate();
+  const initialData = useLoaderData();
+  const navigate = useNavigate();
   const [item, setItem] = useState(initialData);
   const { user } = useAuth();
   const [formData, setFormData] = useState({
@@ -22,14 +24,16 @@ const UpdateFood = () => {
       });
     }
   }, [user]);
+
   useEffect(() => {
     setItem(initialData);
   }, [initialData]);
-  const handleUpdateFoodItem = (event) => {
+
+  const handleUpdateFoodItem = async (event) => {
     event.preventDefault();
-      const form = event.target;
-      
- // Retrieve form data
+    const form = event.target;
+
+    // Retrieve form data
     const food_name = form.food_name.value;
     const food_quantity = form.food_quantity.value;
     const pickup_location = form.pickup_location.value;
@@ -38,8 +42,8 @@ const UpdateFood = () => {
     const food_status = form.food_status.value || "available";
     const food_image = form.food_image.value;
 
-    const updatedFoodItem= {
-     food_name,
+    const updatedFoodItem = {
+      food_name,
       food_quantity,
       pickup_location,
       expired_date,
@@ -48,35 +52,25 @@ const UpdateFood = () => {
       food_image,
     };
 
-    fetch(
-      `${import.meta.env.VITE_API_URL}/foods/${item._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(updatedFoodItem),
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_URL}/foods/${item._id}`,
+        updatedFoodItem
+      );
+      console.log(response.data);
+      if (response.data.modifiedCount) {
+        setItem(updatedFoodItem);
+        await Swal.fire({
+          title: "Success!",
+          text: "Food item updated successfully",
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
+        navigate("/manage-my-food");
       }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.modifiedCount) {
-          setItem(updatedFoodItem);
-          Swal.fire({
-            title: "Success!",
-            text: "Food item Updated successfully",
-            icon: "success",
-            confirmButtonText: "Cool",
-          })
-            .then(() => {
-            navigate('/manage-my-food');
-          }); 
-        }
-      })
-      .catch((error) => {
-        console.error("Error updating food item:", error);
-      });
+    } catch (error) {
+      console.error("Error updating food item:", error);
+    }
   };
     return (
        <div className="mt-6 py-4 text-center ">

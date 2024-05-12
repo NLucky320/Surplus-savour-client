@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         path: "/update-food/:id",
         element: <PrivateRoute><UpdateFood></UpdateFood></PrivateRoute>,
         loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/${params.id}`).then((res) =>
+          fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`).then((res) =>
             res.json()
           ),
       },
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         path: "/view-details/:id",
         element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
         loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/${params.id}`).then((res) =>
+          fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`).then((res) =>
             res.json()
           ),
       },

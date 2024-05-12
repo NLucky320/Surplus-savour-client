@@ -8,6 +8,7 @@ import useAuth from '../../Hooks/useAuth';
 import SocialLogin from './SocialLogin';
 import Lottie from 'lottie-react';
 import Spinner from '../../Components/Spinner/Spinner';
+import axios from 'axios';
 const Login = () => {
     const { signInUser, user,loading } = useAuth();
     const navigate = useNavigate();
@@ -26,23 +27,43 @@ const Login = () => {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => {
-        const { email, password } = data;
+    // const onSubmit = (data) => {
+    //     const { email, password } = data;
    
-        signInUser(email, password)
-            .then((result) => {
-                if (result.user) {
-                    navigate(from);
-                } else {
-                    toast.error('Invalid email or password');
-                }
-                     toast.success('Logged  in successfully');
-            })
-            .catch((error) => {
-                console.error(error.message);
-                toast.error('Invalid email or password');
-            });
-    };
+    //     signInUser(email, password)
+    //         .then((result) => {
+    //             if (result.user) {
+    //                 navigate(from);
+    //             } else {
+    //                 toast.error('Invalid email or password');
+    //             }
+    //                  toast.success('Logged  in successfully');
+    //         })
+    //         .catch((error) => {
+    //             console.error(error.message);
+    //             toast.error('Invalid email or password');
+    //         });
+    // };
+    const onSubmit = async (info) => {
+  try {
+    const { email, password } = info;
+    
+    const result = await signInUser(email, password);
+ const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
+      )
+      console.log(data)
+      navigate(from, { replace: true })
+      toast.success('Signin Successful')
+    } catch (err) {
+      console.log(err)
+      toast.error(err?.message)
+    }
+  }
 
     if (user || loading) return;
     return (

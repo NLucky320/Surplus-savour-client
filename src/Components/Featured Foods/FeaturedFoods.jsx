@@ -5,6 +5,7 @@ import Spinner from '../Spinner/Spinner';
 import { Bounce } from "react-awesome-reveal";
 import { Link } from 'react-router-dom';
 import FeaturedItemCard from './FeaturedItemCard';
+  import axios from 'axios';
 const FeaturedFoods = () => {
      useEffect(() => {
     Aos.init({ duration: 400 });
@@ -13,14 +14,31 @@ const FeaturedFoods = () => {
   const [loading, setLoading] = useState(true);
   const limit = 6; // Number of items to show
   const limitedItems = items.slice(0, limit);
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/foods`)
-      .then((res) => res.json())
-      .then((data) => {
-        setItems(data);
-        setLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${import.meta.env.VITE_API_URL}/foods`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setItems(data);
+  //       setLoading(false);
+  //     });
+  // }, []);
+
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/foods`);
+      setItems(data);
+       setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+      setLoading(false);
+    }
+  };
+
+  fetchData();
+}, []);
+
     return (
         <div>
             {(loading && <Spinner />) || (
