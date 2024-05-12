@@ -3,8 +3,10 @@ import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
         import axios from 'axios';
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 const AddFoodItem = () => {
   const { user } = useAuth();
+    const axiosSecure=useAxiosSecure()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -51,11 +53,11 @@ const AddFoodItem = () => {
     form.reset();
     
  try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/foods`, newFoodItem, {
+      const response = await axiosSecure.post(`/foods`, newFoodItem, {
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: true
+      
       }
       );
 

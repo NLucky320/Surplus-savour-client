@@ -9,6 +9,7 @@ import SocialLogin from './SocialLogin';
 import Lottie from 'lottie-react';
 import Spinner from '../../Components/Spinner/Spinner';
 import axios from 'axios';
+
 const Login = () => {
     const { signInUser, user,loading } = useAuth();
     const navigate = useNavigate();

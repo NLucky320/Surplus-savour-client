@@ -4,8 +4,10 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import axios from "axios";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const UpdateFood = () => {
+  const axiosSecure=useAxiosSecure()
   const initialData = useLoaderData();
   const navigate = useNavigate();
   const [item, setItem] = useState(initialData);
@@ -53,10 +55,10 @@ const UpdateFood = () => {
     };
 
     try {
-  const response = await axios.put(
-    `${import.meta.env.VITE_API_URL}/foods/${item._id}`,
+  const response = await axiosSecure.put(
+    `/foods/${item._id}`,
     updatedFoodItem,
-    { withCredentials: true } // Add the withCredentials option here
+    
   );
 
   if (response.data.modifiedCount) {

@@ -5,7 +5,6 @@ import Modal from 'react-modal';
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
-import axios from 'axios';
 const customStyles = {
   content: {
     top: '57%',

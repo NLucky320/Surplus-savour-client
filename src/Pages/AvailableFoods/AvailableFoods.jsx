@@ -5,13 +5,13 @@ import Spinner from '../../Components/Spinner/Spinner';
 import { Bounce } from "react-awesome-reveal";
 import AvailableItemsCard from './AvailableItemsCard';
 import { Helmet } from 'react-helmet-async';
-import axios from 'axios';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const AvailableFoods = () => {
   useEffect(() => {
     Aos.init({ duration: 400 });
   }, []);
-
+const axiosSecure=useAxiosSecure()
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,9 +19,10 @@ const AvailableFoods = () => {
   const [isTwoColumnLayout, setIsTwoColumnLayout] = useState(false);
 
   useEffect(() => {
+      
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/foods?status=available`);
+        const response = await axiosSecure.get(`${import.meta.env.VITE_API_URL}/foods?status=available`);
         setItems(response.data);
         setLoading(false);
       } catch (error) {

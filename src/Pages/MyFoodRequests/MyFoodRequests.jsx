@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import Spinner from "../../Components/Spinner/Spinner";
 import { Helmet } from "react-helmet-async";
-import axios from 'axios';
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const MyFoodRequests = () => {
+  const axiosSecure=useAxiosSecure()
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const { user } = useAuth() || {};
@@ -13,7 +14,7 @@ const MyFoodRequests = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/myFoodRequest/${user?.email}`, { withCredentials: true });
+            const response = await axiosSecure(`/myFoodRequest/${user?.email}`);
             setItems(response.data);
             setLoading(false);
         } catch (error) {

@@ -4,13 +4,13 @@ import Swal from "sweetalert2";
 import Spinner from "../../Components/Spinner/Spinner";
 import useAuth from "../../Hooks/useAuth";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const ManageMyFood = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth() || {};
-
+  const axiosSecure = useAxiosSecure();
   useEffect(() => {
     fetchData();
   }, [user]);
@@ -18,9 +18,7 @@ const ManageMyFood = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/myFood/${user?.email}`, {withCredentials:true}
-      );
+      const response = await axiosSecure(`/myFood/${user?.email}`);
       setItems(response.data);
       setLoading(false);
     } catch (error) {
@@ -42,16 +40,12 @@ const ManageMyFood = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await axios.delete(
-            `${import.meta.env.VITE_API_URL}/foods/${_id}`, {withCredentials:true}
+          const response = await axiosSecure.delete(
+            `/foods/${_id}`
           );
           console.log(response.data);
           if (response.data.deletedCount > 0) {
-            Swal.fire(
-              "Deleted!",
-              "Your item has been deleted",
-              "success"
-            );
+            Swal.fire("Deleted!", "Your item has been deleted", "success");
             const remaining = items.filter((food) => food._id !== _id);
             setItems(remaining);
           }
