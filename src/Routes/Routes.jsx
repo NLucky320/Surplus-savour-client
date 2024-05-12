@@ -46,25 +46,27 @@ const router = createBrowserRouter([
         element: <PrivateRoute><ManageMyFood></ManageMyFood></PrivateRoute>,
       },
       {
-        path: "/update-food/:id",
-        element: <PrivateRoute><UpdateFood></UpdateFood></PrivateRoute>,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`).then((res) =>
-            res.json()
-          ),
-      },
+  path: "/update-food/:id",
+  element: <PrivateRoute><UpdateFood></UpdateFood></PrivateRoute>,
+  loader: ({ params }) =>
+    fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`, {
+      credentials: 'include' // Add the credentials option here
+    }).then((res) => res.json()),
+},
       {
         path: '/my-food-request',
         element: <PrivateRoute><MyFoodRequests></MyFoodRequests></PrivateRoute>
       },
-      {
-        path: "/view-details/:id",
-        element: <PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`).then((res) =>
-            res.json()
-          ),
-      },
+     {
+  path: "/view-details/:id",
+  element: <PrivateRoute><ViewDetails /></PrivateRoute>,
+  loader: ({ params }) => {
+    return fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`, {
+      credentials: 'include' // Setting credentials to include
+    }).then((res) => res.json());
+  },
+}
+
     ],
   },
 ]);

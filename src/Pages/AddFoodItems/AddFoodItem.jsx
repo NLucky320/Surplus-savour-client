@@ -49,32 +49,15 @@ const AddFoodItem = () => {
     };
     // console.log(newFoodItem );
     form.reset();
-    // fetch(`${import.meta.env.VITE_API_URL}/foods`, {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(newFoodItem),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     // console.log(data);
-    //     if (data.insertedId) {
-    //       Swal.fire({
-    //         title: "Success!",
-    //         text: "Food item added successfully",
-    //         icon: "success",
-    //         confirmButtonText: "Cool",
-    //       });
-    //     }
-    //     });
     
  try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/foods`, newFoodItem, {
         headers: {
           "Content-Type": "application/json",
         },
-      });
+        withCredentials: true
+      }
+      );
 
       const data = response.data;
       if (data.insertedId) {

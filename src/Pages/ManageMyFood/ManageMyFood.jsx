@@ -19,7 +19,7 @@ const ManageMyFood = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/myFood/${user?.email}`
+        `${import.meta.env.VITE_API_URL}/myFood/${user?.email}`, {withCredentials:true}
       );
       setItems(response.data);
       setLoading(false);
@@ -43,7 +43,7 @@ const ManageMyFood = () => {
       if (result.isConfirmed) {
         try {
           const response = await axios.delete(
-            `${import.meta.env.VITE_API_URL}/foods/${_id}`
+            `${import.meta.env.VITE_API_URL}/foods/${_id}`, {withCredentials:true}
           );
           console.log(response.data);
           if (response.data.deletedCount > 0) {

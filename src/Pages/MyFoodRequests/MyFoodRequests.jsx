@@ -9,18 +9,23 @@ const MyFoodRequests = () => {
     const [loading, setLoading] = useState(true);
     const { user } = useAuth() || {};
 
-    useEffect(() => {
+ useEffect(() => {
+    const fetchData = async () => {
         setLoading(true);
-        axios.get(`${import.meta.env.VITE_API_URL}/myFoodRequest/${user?.email}`)
-            .then((response) => {
-                setItems(response.data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-                setLoading(false);
-            });
-    }, [user]);
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/myFoodRequest/${user?.email}`, { withCredentials: true });
+            setItems(response.data);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setLoading(false);
+        }
+    };
+
+    fetchData();
+}, [user]);
+
+
   return (
       <div className="mt-12 md:mt-[80px] p-6 text-center max-w-[1170px] mx-auto">
       <Helmet>

@@ -351,7 +351,7 @@ const ViewDetails = () => {
                       type="text"
                       name="donor_name"
                       placeholder="Name"
-                      value={item?.donor.name}
+                      value={item?.donor?.name}
                       className="input input-bordered w-full"
                       readOnly
                     />

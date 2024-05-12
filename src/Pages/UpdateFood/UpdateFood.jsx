@@ -53,25 +53,27 @@ const UpdateFood = () => {
     };
 
     try {
-      const response = await axios.put(
-        `${import.meta.env.VITE_API_URL}/foods/${item._id}`,
-        updatedFoodItem
-      );
-      console.log(response.data);
-      if (response.data.modifiedCount) {
-        setItem(updatedFoodItem);
-        await Swal.fire({
-          title: "Success!",
-          text: "Food item updated successfully",
-          icon: "success",
-          confirmButtonText: "Cool",
-        });
-        navigate("/manage-my-food");
-      }
-    } catch (error) {
-      console.error("Error updating food item:", error);
-    }
+  const response = await axios.put(
+    `${import.meta.env.VITE_API_URL}/foods/${item._id}`,
+    updatedFoodItem,
+    { withCredentials: true } // Add the withCredentials option here
+  );
+
+  if (response.data.modifiedCount) {
+    setItem(updatedFoodItem);
+    await Swal.fire({
+      title: "Success!",
+      text: "Food item updated successfully",
+      icon: "success",
+      confirmButtonText: "Cool",
+    });
+    navigate("/manage-my-food");
+  }
+} catch (error) {
+  console.error("Error updating food item:", error);
+}
   };
+
     return (
        <div className="mt-6 py-4 text-center ">
       <Helmet>
