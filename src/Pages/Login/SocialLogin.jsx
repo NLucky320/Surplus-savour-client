@@ -52,7 +52,7 @@ const SocialLogin = () => {
         { withCredentials: true }
       );
       console.log(data);
-      toast.success("Signin Successful");
+      toast.success("Sign in Successfully");
       navigate(from, { replace: true });
     } catch (err) {
       console.log(err);

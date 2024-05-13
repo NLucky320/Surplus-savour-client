@@ -11,6 +11,7 @@ import AddFoodItem from "../Pages/AddFoodItems/AddFoodItem";
 import ManageMyFood from "../Pages/ManageMyFood/ManageMyFood";
 import UpdateFood from "../Pages/UpdateFood/UpdateFood";
 import MyFoodRequests from "../Pages/MyFoodRequests/MyFoodRequests";
+import ContactUs from "../Pages/ContactUS/ContactUs";
 
 
 
@@ -64,8 +65,12 @@ const router = createBrowserRouter([
     return fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`, {
       credentials: 'include' // Setting credentials to include
     }).then((res) => res.json());
-  },
-}
+       }
+      },
+      {
+        path: '/contact-us',
+        element:<ContactUs></ContactUs>
+     }
 
     ],
   },

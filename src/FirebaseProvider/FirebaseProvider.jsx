@@ -45,8 +45,9 @@ const FirebaseProvider = ({ children }) => {
     
         setUser(null)
     setLoading(false)
-    Navigate('/')
-       return signOut(auth)
+   
+    signOut(auth)
+     Navigate('/')
         
     }
 
