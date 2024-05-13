@@ -1,24 +1,19 @@
 import React from 'react';
-import Aos from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
 import { Bounce } from 'react-awesome-reveal';
 
 const OurLocation = () => {
-      useEffect(() => {
-    Aos.init({ duration: 500 });
-      }, []);
+    
      const customIcon = new Icon({
     iconUrl: "https://i.ibb.co/fF3bmMx/marker.jpg",
     iconSize: [38, 38],
   });
     return (
         <div className='max-w-[1170px] mx-auto'>
-         <div className="mt-8 lg:mt-28" data-aos="fade-up">
-         <h2 className="text-center text-2xl lg:mb-6 lg:text-4xl font-bold dark:text-[#f9a06f] text-black">
+         <div className="mt-8 lg:mt-28">
+         <h2 className="text-center text-2xl mb-4 lg:mb-8 lg:text-4xl font-bold dark:text-[#f9a06f] text-black">
         <Bounce>Our Location</Bounce>
       </h2>
             </div>

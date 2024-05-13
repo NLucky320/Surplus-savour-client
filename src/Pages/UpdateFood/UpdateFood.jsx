@@ -6,8 +6,13 @@ import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import axios from "axios";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Bounce } from "react-awesome-reveal";
+import Aos from "aos";
 
 const UpdateFood = () => {
+    useEffect(() => {
+    Aos.init({ duration: 500 });
+      }, []);
   const axiosSecure=useAxiosSecure()
   const initialData = useLoaderData();
   const navigate = useNavigate();
@@ -92,10 +97,11 @@ const UpdateFood = () => {
       </div>
       <div className="bg-[#f9a06f] -mt-1">
         <div className="max-w-[800px] mx-auto text-black ">
-          <h2 className="font-bold text-[28px] md:text-[40px] pt-4">
-          Update Food Item
-          </h2>
-          <p className="py-4"> </p>
+           <div data-aos="fade-up">
+         <h2 className="text-center text-2xl mb-4 lg:mb-8 lg:text-4xl font-bold dark:text-[#f9a06f] text-black">
+        <Bounce>Update Food Item</Bounce>
+      </h2>
+            </div>
         </div>
           <div className="max-w-[1170px] mx-auto p-4">
              <form onSubmit={handleUpdateFoodItem}>

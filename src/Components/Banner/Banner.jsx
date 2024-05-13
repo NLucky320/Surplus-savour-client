@@ -33,7 +33,7 @@ const Banner = () => {
                 <div className="bg-[#f9a06f] text-white mr-2 text-xl px-1 py-1 rounded-full">
                   <AiFillFire />
                 </div>
-                Hot Products
+                 Featured Dishes
               </div>
 
               <p className="xl:text-[50px] lg:text-[40px] md:text-[32px] text-[30px] font-bold text-center lg:text-left">
@@ -78,7 +78,7 @@ const Banner = () => {
                 <div className="bg-[#f9a06f] text-white mr-2 text-xl px-1 py-1 rounded-full">
                   <AiFillFire />
                 </div>
-                Hot Products
+                  Featured Dishes
               </div>
 
               <p className="xl:text-[50px] lg:text-[40px] md:text-[32px] text-[30px] font-bold text-center lg:text-left">
@@ -124,7 +124,7 @@ const Banner = () => {
                 <div className="bg-[#f9a06f] text-white mr-2 text-xl px-1 py-1 rounded-full">
                   <AiFillFire />
                 </div>
-                Hot Products
+                 Featured Dishes
               </div>
 
               <p className="xl:text-[50px] lg:text-[40px] md:text-[32px] text-[30px] font-bold text-center lg:text-left">

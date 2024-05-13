@@ -4,8 +4,11 @@ import Spinner from "../../Components/Spinner/Spinner";
 import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Bounce } from "react-awesome-reveal";
+
 
 const MyFoodRequests = () => {
+  
   const axiosSecure=useAxiosSecure()
     // const [items, setItems] = useState([]);
     // const [loading, setLoading] = useState(true);
@@ -40,13 +43,13 @@ if (isLoading) return <Spinner></Spinner>
         <title>Surplus Saver | My Food Request</title>
       </Helmet>
       <div className="max-w-[800px] mx-auto">
-        <h2 className="font-bold text-[28px] md:text-[40px] pt-4">
-         My Food Items
-        </h2>
-        <p className="py-4">
-       
-        </p>
-      </div>
+      
+         <h2 className="text-center text-2xl mb-4 lg:mb-8 lg:text-4xl font-bold dark:text-[#f9a06f] text-black">
+        <Bounce>My requested Food</Bounce>
+      </h2>
+            </div>
+    
+
 
       <div className="overflow-x-auto whitespace-nowrap">
               <table className="table ">

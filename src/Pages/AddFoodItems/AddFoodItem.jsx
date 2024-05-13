@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-        import axios from 'axios';
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+
+import { Bounce } from "react-awesome-reveal";
 const AddFoodItem = () => {
   const { user } = useAuth();
     const axiosSecure=useAxiosSecure()
@@ -13,6 +14,7 @@ const AddFoodItem = () => {
   });
 
   useEffect(() => {
+    
     if (user) {
       setFormData({
         name: user.displayName || "",
@@ -94,10 +96,11 @@ const AddFoodItem = () => {
       </div>
       <div className="bg-[#f9a06f] -mt-1">
         <div className="max-w-[800px] mx-auto text-black ">
-          <h2 className="font-bold text-[28px] md:text-[40px] pt-4">
-            Add Food Item
-          </h2>
-          <p className="py-4"> </p>
+    
+         <h2 className="text-center text-2xl mb-4 lg:mb-8 lg:text-4xl font-bold dark:text-[#f9a06f] text-black">
+        <Bounce>Add Food Item</Bounce>
+      </h2>
+           
         </div>
         <div className="max-w-[1170px] mx-auto py-4">
           <form onSubmit={handleAddFoodItem}>

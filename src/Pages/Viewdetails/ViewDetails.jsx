@@ -86,7 +86,8 @@ const ViewDetails = () => {
   const food_status = 'Requested';
   const donor_name = form.donor_name.value;
   const request_date = form.request_date.value;
-  const email=form.user_email.value
+    const email = form.user_email.value;
+    const additional_notes = form.additional_notes.value; 
     const foodItem = {
         food_id,
       food_name,
@@ -95,7 +96,8 @@ const ViewDetails = () => {
         food_status,
         donor_name,
         request_date,
-      email
+      email,
+      additional_notes
   };
     // Send a PATCH request to update the food status to "Requested"
     fetch(`${import.meta.env.VITE_API_URL}/foods/${food_id}`, {
@@ -103,7 +105,7 @@ const ViewDetails = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ food_status: "Requested" }),
+      body: JSON.stringify({ food_status, available_notes: additional_notes }),
         credentials: "include",
     })
       .then((res) => res.json())
