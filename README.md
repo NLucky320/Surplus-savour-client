@@ -1,4 +1,4 @@
-# SurPlus savour
+# Surplus savour
 
 -[Food Sharing Platform](https://assignment-11-648b1.web.app/)
 
