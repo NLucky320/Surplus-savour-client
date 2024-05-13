@@ -7,30 +7,37 @@ import { Link } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const ManageMyFood = () => {
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+
   const { user } = useAuth() || {};
   const axiosSecure = useAxiosSecure();
-  useEffect(() => {
-    fetchData();
-  }, [user]);
+const { data: fetchedItems, isLoading, refetch } = useQuery(
+  {
+    queryKey: ["myFood", user?.email], 
+    queryFn: async () => {
+      const response = await axiosSecure.get(`/myFood/${user?.email}`);
+      return response.data;
+    },
+   
+  },
+  
+);
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const response = await axiosSecure(`/myFood/${user?.email}`);
-      setItems(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setLoading(false);
-    }
-  };
+  const deleteMutation = useMutation({
+    mutationFn: (_id) => axiosSecure.delete(`/foods/${_id}`),
+    onSuccess: () => {
+      Swal.fire("Deleted!", "Your item has been deleted", "success");
+      refetch();
+    },
+    onError: (error) => {
+      console.error("Error deleting item:", error);
+    },
+  });
 
-  const handleDelete = async (_id) => {
-    console.log(_id);
+  const handleDelete = (_id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -39,24 +46,18 @@ const ManageMyFood = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
+    }).then((result) => {
       if (result.isConfirmed) {
-        try {
-          const response = await axiosSecure.delete(
-            `/foods/${_id}`
-          );
-          console.log(response.data);
-          if (response.data.deletedCount > 0) {
-            Swal.fire("Deleted!", "Your item has been deleted", "success");
-            const remaining = items.filter((food) => food._id !== _id);
-            setItems(remaining);
-          }
-        } catch (error) {
-          console.error("Error deleting item:", error);
-        }
+        deleteMutation.mutate(_id); 
       }
     });
   };
+
+  useEffect(() => {
+    if (fetchedItems) {
+      setItems(fetchedItems);
+    }
+  }, [fetchedItems]);
 
   return (
     <div className="mt-12 md:mt-[80px] p-6 text-center max-w-[1170px] mx-auto">
@@ -80,12 +81,12 @@ const ManageMyFood = () => {
               <th>Food Name</th>
               <th>Food Quantity</th>
               <th>Food Status</th>
-              <th>Update</th>
-              <th>Delete</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody className="w-100%">
-            {loading ? (
+            {isLoading ? (
               <tr>
                 <td colSpan="6">
                   <Spinner></Spinner>

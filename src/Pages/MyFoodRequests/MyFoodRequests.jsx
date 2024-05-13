@@ -3,30 +3,37 @@ import useAuth from "../../Hooks/useAuth";
 import Spinner from "../../Components/Spinner/Spinner";
 import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const MyFoodRequests = () => {
   const axiosSecure=useAxiosSecure()
-    const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(true);
+    // const [items, setItems] = useState([]);
+    // const [loading, setLoading] = useState(true);
     const { user } = useAuth() || {};
 
- useEffect(() => {
-    const fetchData = async () => {
-        setLoading(true);
-        try {
-            const response = await axiosSecure(`/myFoodRequest/${user?.email}`);
-            setItems(response.data);
-            setLoading(false);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            setLoading(false);
-        }
-    };
+//  useEffect(() => {
+//     const fetchData = async () => {
+//         setLoading(true);
+//         try {
+//             const response = await axiosSecure(`/myFoodRequest/${user?.email}`);
+//             setItems(response.data);
+//             setLoading(false);
+//         } catch (error) {
+//             console.error('Error fetching data:', error);
+//             setLoading(false);
+//         }
+//     };
 
-    fetchData();
-}, [user]);
-
-
+//     fetchData();
+// }, [user]);
+ const { data:items, isLoading, error } = useQuery({
+    queryKey: ["myFoodRequest", user?.email],
+    queryFn: async () => {
+      const response = await axiosSecure(`/myFoodRequest/${user?.email}`);
+      return response.data;
+    },
+  });
+if (isLoading) return <Spinner></Spinner>
   return (
       <div className="mt-12 md:mt-[80px] p-6 text-center max-w-[1170px] mx-auto">
       <Helmet>
@@ -57,24 +64,22 @@ const MyFoodRequests = () => {
         </thead>
         <tbody className="w-100%">
 
-          {loading ? (
+        
             <tr>
-              <td colSpan="6">
-              <Spinner></Spinner>
-              </td>
+             
             </tr>
-          ) : (
-            items?.map((item, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td >{item?.food_name}</td>
-                <td> {item?.expired_date}</td>
-                <td> {item?.food_status}</td>
-                <td> {item?.donor_name}</td>
-                <td> {item?.request_date}</td>
-              </tr>
-            ))
-          )}
+            {
+              items?.map((item, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td >{item?.food_name}</td>
+                  <td> {item?.expired_date}</td>
+                  <td> {item?.food_status}</td>
+                  <td> {item?.donor_name}</td>
+                  <td> {item?.request_date}</td>
+                </tr>
+              ))
+            }
         </tbody>
       </table>
 </div>
