@@ -5,9 +5,11 @@ import { useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
+import { Bounce } from 'react-awesome-reveal';
+
 const OurLocation = () => {
       useEffect(() => {
-    Aos.init({ duration: 700 });
+    Aos.init({ duration: 500 });
       }, []);
      const customIcon = new Icon({
     iconUrl: "https://i.ibb.co/fF3bmMx/marker.jpg",
@@ -16,12 +18,9 @@ const OurLocation = () => {
     return (
         <div className='max-w-[1170px] mx-auto'>
          <div className="mt-8 lg:mt-28" data-aos="fade-up">
-          <h2
-            id="estate-s"
-            className="text-center font-bold text-3xl  animate__animated animate__headShake  animate__slow animate__infinite mb-4"
-          >
-            Our Location
-          </h2>
+         <h2 className="text-center text-2xl lg:mb-6 lg:text-4xl font-bold dark:text-[#f9a06f] text-black">
+        <Bounce>Our Location</Bounce>
+      </h2>
             </div>
         <div className="h-[500px]">
            <MapContainer

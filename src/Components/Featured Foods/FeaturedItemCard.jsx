@@ -8,7 +8,7 @@ import "animate.css";
 const FeaturedItemCard = ({ item }) => {
    
       useEffect(() => {
-    Aos.init({ duration: 700 });
+    Aos.init({ duration: 500 });
       }, [])
     
     // console.log(formData)

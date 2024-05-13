@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -103,6 +104,7 @@ const ViewDetails = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ food_status: "Requested" }),
+        credentials: "include",
     })
       .then((res) => res.json())
       .then((data) => {
@@ -115,12 +117,13 @@ const ViewDetails = () => {
       });
 
     // Send a POST request to add the food request to myFoodRequest collection
-    fetch(`${import.meta.env.VITE_API_URL}/myFoodRequest`, {
+    fetch(`${import.meta.env.VITE_API_URL}/myFoodRequest`,  {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(foodItem ),
+      body: JSON.stringify(foodItem),
+        credentials: "include",
     })
       .then((res) => res.json())
       .then((data) => {

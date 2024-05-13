@@ -41,7 +41,7 @@ const SocialLogin = () => {
     try {
       // 1. google sign in from firebase
       const result = await googleLogin();
-      console.log(result.user);
+      // console.log(result.user);
 
       //2. get token from server using email
       const { data } = await axios.post(

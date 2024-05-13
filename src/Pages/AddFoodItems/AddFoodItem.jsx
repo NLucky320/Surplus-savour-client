@@ -31,7 +31,7 @@ const AddFoodItem = () => {
     const pickup_location = form.pickup_location.value;
     const expired_date = form.expired_date.value;
     const additional_notes = form.additional_notes.value;
-    const food_status = form.food_status.value || "available";
+    const food_status = form.food_status.value || "Available";
     const food_image = form.food_image.value;
     
 
@@ -183,7 +183,7 @@ const AddFoodItem = () => {
                   type="text"
                   name="food_status"
                   placeholder="Food Status"
-                  defaultValue="available"
+                  defaultValue="Available"
                   className="input input-bordered w-full"
                 />
               </label>

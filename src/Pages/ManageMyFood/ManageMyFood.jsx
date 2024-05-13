@@ -5,6 +5,8 @@ import Spinner from "../../Components/Spinner/Spinner";
 import useAuth from "../../Hooks/useAuth";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const ManageMyFood = () => {
   const [items, setItems] = useState([]);
@@ -78,8 +80,8 @@ const ManageMyFood = () => {
               <th>Food Name</th>
               <th>Food Quantity</th>
               <th>Food Status</th>
-              <th></th>
-              <th></th>
+              <th>Update</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody className="w-100%">
@@ -103,17 +105,17 @@ const ManageMyFood = () => {
                   <td>{item?.food_status}</td>
                   <td>
                     <Link to={`/update-food/${item._id}`}>
-                      <button className="btn bg-[#f9a06f] text-white">
-                        Update
+                      <button className=" text-[#f9a06f] bg-transparent text-2xl ">
+                    <FaEdit />
                       </button>
                     </Link>
                   </td>
                   <td>
                     <button
                       onClick={() => handleDelete(item._id)}
-                      className="btn bg-[#f9a06f] text-white"
+                      className="text-[#f9a06f] bg-transparent text-2xl"
                     >
-                      Delete
+             <MdDelete />
                     </button>
                   </td>
                 </tr>

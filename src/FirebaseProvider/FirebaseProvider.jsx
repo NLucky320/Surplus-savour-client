@@ -40,15 +40,14 @@ const FirebaseProvider = ({ children }) => {
 
     //log out
   const logOut = async () => {
-         const { data } = await axios(`${import.meta.env.VITE_API_URL}/logout`, {
-      withCredentials: true,
-    })
+         const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {withCredentials: true})
     toast.success('Log out successfully')
     
         setUser(null)
-        setLoading(false)
-        signOut(auth)
-        Navigate('/')
+    setLoading(false)
+    Navigate('/')
+       return signOut(auth)
+        
     }
 
       //update user profile

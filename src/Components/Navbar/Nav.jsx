@@ -5,7 +5,7 @@ import {
   Typography,
   IconButton,
 } from "@material-tailwind/react";
-import { Link, NavLink, Navigate } from "react-router-dom";
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
 
 import logo from "../../assets/thanksgiving.png";
 
@@ -32,16 +32,12 @@ const Nav = () => {
   // console.log(user);
 
   const [openNav, setOpenNav] = React.useState(false);
-  const handleSignOut = () => {
-    logOut()
-      .then((result) => {
-        console.log(result.user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    Navigate("/");
-  };
+ const handleSignOut = () => {
+  logOut()
+    .catch((error) => {
+      console.log(error);
+    });
+};
   React.useEffect(() => {
     window.addEventListener(
       "resize",

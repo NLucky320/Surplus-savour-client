@@ -22,7 +22,7 @@ const axiosSecure=useAxiosSecure()
       
     const fetchData = async () => {
       try {
-        const response = await axiosSecure.get(`${import.meta.env.VITE_API_URL}/foods?status=available`);
+        const response = await axiosSecure.get(`${import.meta.env.VITE_API_URL}/foods?status=Available`);
         setItems(response.data);
         setLoading(false);
       } catch (error) {
