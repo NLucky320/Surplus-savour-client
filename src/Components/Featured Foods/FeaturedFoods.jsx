@@ -20,7 +20,7 @@ const FeaturedFoods = () => {
   });
 
   function fetchData() {
-    return axiosSecure.get(`/foods`).then(response => response.data);
+    return axiosSecure.get(`/foods?status=Available`).then(response => response.data);
   }
   return (
     <div>

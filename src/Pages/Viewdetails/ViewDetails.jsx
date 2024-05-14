@@ -110,7 +110,7 @@ const ViewDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
   
       })
       .catch((error) => {
@@ -129,7 +129,7 @@ const ViewDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         toast.success("Food request added successfully!");
         navigate('/my-food-request')
       })

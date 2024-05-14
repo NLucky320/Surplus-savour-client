@@ -46,7 +46,7 @@ const { data: fetchedItems, isLoading, refetch } = useQuery(
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#f9a06f",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
@@ -62,6 +62,17 @@ const { data: fetchedItems, isLoading, refetch } = useQuery(
     }
   }, [fetchedItems]);
 
+ 
+  const getStatusClass = (status) => {
+    switch (status) {
+      case 'Available':
+        return 'text-green-500';
+      case 'Requested':
+        return 'text-red-500';
+      default:
+        return 'text-black';
+    }
+  };
   if(isLoading) return <Spinner></Spinner>
 
   return (
@@ -87,8 +98,8 @@ const { data: fetchedItems, isLoading, refetch } = useQuery(
               <th>Food Name</th>
               <th>Food Quantity</th>
               <th>Food Status</th>
-              <th></th>
-              <th></th>
+              <th>Update</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody className="w-100%">
@@ -103,7 +114,7 @@ const { data: fetchedItems, isLoading, refetch } = useQuery(
                   </td>
                   <td>{item?.food_name}</td>
                   <td>{item?.food_quantity}</td>
-                  <td>{item?.food_status}</td>
+                  <td className={getStatusClass(item?.food_status)}>{item?.food_status}</td>
                   <td>
                     <Link to={`/update-food/${item._id}`}>
                       <button className=" text-[#f9a06f] bg-transparent text-2xl ">

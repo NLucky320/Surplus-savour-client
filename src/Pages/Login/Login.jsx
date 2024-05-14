@@ -57,7 +57,7 @@ const Login = () => {
         },
         { withCredentials: true }
       )
-      console.log(data)
+    //   console.log(data)
       navigate(from, { replace: true })
       toast.success('Login Successfully')
     } catch (err) {

@@ -41,7 +41,7 @@ const Register = () => {
         },
         { withCredentials: true }
       );
-      console.log(data);
+      // console.log(data);
       navigate(from, { replace: true });
       toast.success("Signup Successful");
     } catch (err) {

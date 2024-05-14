@@ -102,7 +102,7 @@ const AddFoodItem = () => {
       </h2>
            
         </div>
-        <div className="max-w-[1170px] mx-auto py-4">
+        <div className="max-w-[1170px] mx-auto p-4">
           <form onSubmit={handleAddFoodItem}>
           {/* form food_name and food_image row */}
           <div className="md:flex mb-8">

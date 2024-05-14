@@ -51,7 +51,7 @@ const SocialLogin = () => {
         },
         { withCredentials: true }
       );
-      console.log(data);
+      // console.log(data);
       toast.success("Sign in Successfully");
       navigate(from, { replace: true });
     } catch (err) {
@@ -63,7 +63,7 @@ const SocialLogin = () => {
     try {
       // 1. google sign in from firebase
       const result = await githubLogin();
-      console.log(result.user);
+      // console.log(result.user);
 
       //2. get token from server using email
       const { data } = await axios.post(
@@ -73,11 +73,11 @@ const SocialLogin = () => {
         },
         { withCredentials: true }
       );
-      console.log(data);
+      // console.log(data);
       toast.success("Signin Successful");
       navigate(from, { replace: true });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error(err?.message);
     }
   };

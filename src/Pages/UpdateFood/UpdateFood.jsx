@@ -85,7 +85,7 @@ const UpdateFood = () => {
     return (
        <div className="mt-6 py-4 text-center ">
       <Helmet>
-        <title>Surplus Saver | Add Food</title>
+        <title>Surplus Saver | Update Food</title>
       </Helmet>
       <div className="bg-[url('../../assets/wave.svg')]">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
