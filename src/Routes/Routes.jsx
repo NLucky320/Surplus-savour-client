@@ -49,10 +49,10 @@ const router = createBrowserRouter([
       {
   path: "/update-food/:id",
   element: <PrivateRoute><UpdateFood></UpdateFood></PrivateRoute>,
-  loader: ({ params }) =>
-    fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`, {
-      credentials: 'include' // Add the credentials option here
-    }).then((res) => res.json()),
+  // loader: ({ params }) =>
+  //   fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`, {
+  //     credentials: 'include' // Add the credentials option here
+  //   }).then((res) => res.json()),
 },
       {
         path: '/my-food-request',
@@ -61,11 +61,11 @@ const router = createBrowserRouter([
      {
   path: "/view-details/:id",
   element: <PrivateRoute><ViewDetails /></PrivateRoute>,
-  loader: ({ params }) => {
-    return fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`, {
-      credentials: 'include' // Setting credentials to include
-    }).then((res) => res.json());
-       }
+  // loader: ({ params }) => {
+  //   return fetch(`${import.meta.env.VITE_API_URL}/foods/${params.id}`, {
+  //     credentials: 'include' // Setting credentials to include
+  //   }).then((res) => res.json());
+  //      }
       },
       {
         path: '/contact-us',

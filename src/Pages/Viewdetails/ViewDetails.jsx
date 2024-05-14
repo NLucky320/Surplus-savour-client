@@ -1,11 +1,14 @@
 
 import React, { useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Modal from 'react-modal';
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../Hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Spinner from "../../Components/Spinner/Spinner";
 const customStyles = {
   content: {
     top: '57%',
@@ -28,7 +31,7 @@ const ViewDetails = () => {
     name: "",
     email: "",
   });
-
+ const axiosSecure=useAxiosSecure()
   useEffect(() => {
     if (user) {
       setFormData({
@@ -61,15 +64,28 @@ const ViewDetails = () => {
   function closeModal() {
     setIsOpen(false);
   }
+ const { id } = useParams();
+  // const foodsItem = useLoaderData();
 
-  const foodsItem = useLoaderData();
-  const initialData = useLoaderData();
-  const [item, setItem] = useState(initialData);
 
+
+ const { data: foodsItem, isLoading } = useQuery(
+   {
+     queryKey: ["food", id],
+     queryFn: async () => {
+       const response = await axiosSecure.get(`/foods/${id}`);
+      //  console.log(foodsItem)
+       return response.data;
+        
+     },
+   }
+  )
+    const [item, setItem] = useState(foodsItem);
+ 
   useEffect(() => {
-    setItem(initialData);
-  }, [initialData]);
-
+    setItem(foodsItem);
+  }, [foodsItem]);
+  
   const handleFoodRequest = async e => {
     e.preventDefault();
     if (user?.email === foodsItem?.donor?.email) {
@@ -137,10 +153,11 @@ const ViewDetails = () => {
         console.error("Error adding food request:", error);
       });
   };
+  if(isLoading) return <Spinner></Spinner>
 
   return (
     <div
-      key={foodsItem._id}
+   
       className="items-center max-w-xl mx-auto p-4 shadow-md mt-12 md:mt-[80px]"
     >
       <Helmet>

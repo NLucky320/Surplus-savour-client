@@ -62,7 +62,6 @@ const AddFoodItem = () => {
       
       }
       );
-
       const data = response.data;
       if (data.insertedId) {
         Swal.fire({
@@ -187,7 +186,8 @@ const AddFoodItem = () => {
                   name="food_status"
                   placeholder="Food Status"
                   defaultValue="Available"
-                  className="input input-bordered w-full"
+                    className="input input-bordered w-full"
+                    readOnly
                 />
               </label>
             </div>

@@ -1,28 +1,29 @@
 
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import axios from "axios";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Bounce } from "react-awesome-reveal";
 import Aos from "aos";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import Spinner from "../../Components/Spinner/Spinner";
 
 const UpdateFood = () => {
     useEffect(() => {
     Aos.init({ duration: 500 });
       }, []);
   const axiosSecure=useAxiosSecure()
-  const initialData = useLoaderData();
   const navigate = useNavigate();
-  const [item, setItem] = useState(initialData);
+
   const { user } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
   });
-
+ const { id } = useParams();
   useEffect(() => {
     if (user) {
       setFormData({
@@ -33,9 +34,43 @@ const UpdateFood = () => {
     }
   }, [user]);
 
+ const { data: initialData, isLoading } = useQuery(
+   {
+     queryKey: ["food", id],
+     queryFn: async () => {
+       const response = await axiosSecure.get(`/foods/${id}`);
+       return response.data;
+     },
+   }
+   
+  );
+    const [item, setItem] = useState(initialData);
   useEffect(() => {
     setItem(initialData);
   }, [initialData]);
+
+  const mutation = useMutation({
+    mutationFn: async (updatedFoodItem) => {
+      const response = await axiosSecure.put(`/foods/${item._id}`, updatedFoodItem);
+      return response.data;
+    },
+    onSuccess: async (data) => {
+      if (data.modifiedCount) {
+        setItem(data);
+        await Swal.fire({
+          title: "Success!",
+          text: "Food item updated successfully",
+          icon: "success",
+          confirmButtonText: "Cool"
+        });
+        navigate("/manage-my-food");
+      }
+    },
+    onError: (error) => {
+      console.error("Error updating food item:", error);
+    }
+  });
+
 
   const handleUpdateFoodItem = async (event) => {
     event.preventDefault();
@@ -59,29 +94,10 @@ const UpdateFood = () => {
       food_status,
       food_image,
     };
-
-    try {
-  const response = await axiosSecure.put(
-    `/foods/${item._id}`,
-    updatedFoodItem,
-    
-  );
-
-  if (response.data.modifiedCount) {
-    setItem(updatedFoodItem);
-    await Swal.fire({
-      title: "Success!",
-      text: "Food item updated successfully",
-      icon: "success",
-      confirmButtonText: "Cool",
-    });
-    navigate("/manage-my-food");
-  }
-} catch (error) {
-  console.error("Error updating food item:", error);
-}
+mutation.mutate(updatedFoodItem);
   };
 
+  if(isLoading) return <Spinner></Spinner>
     return (
        <div className="mt-6 py-4 text-center ">
       <Helmet>
