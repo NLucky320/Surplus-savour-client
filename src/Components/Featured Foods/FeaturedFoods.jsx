@@ -42,7 +42,7 @@ const FeaturedFoods = () => {
                 <Bounce>Featured Foods</Bounce>
               </h2>
               <div className="max-w-[1170px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 mt-4 lg:mt-10 px-2 lg:px-6">
-                {items.slice(0, 6).map(item => (
+                {items?.slice(0, 6).map(item => (
                   <FeaturedItemCard item={item} key={item._id}></FeaturedItemCard>
                 ))}
               </div>

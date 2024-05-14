@@ -61,6 +61,7 @@ if (isLoading) return <Spinner></Spinner>
             <th>Expired Date</th>
             <th>Food Status</th>
             <th>Donor Name</th>
+            <th>Additional Notes</th>
             <th>Request Date</th>
       
           </tr>
@@ -79,6 +80,7 @@ if (isLoading) return <Spinner></Spinner>
                   <td> {item?.expired_date}</td>
                   <td> {item?.food_status}</td>
                   <td> {item?.donor_name}</td>
+                  <td> {item?.additional_notes}</td>
                   <td> {item?.request_date}</td>
                 </tr>
               ))
