@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import error from '../../assets/404.json'
+import error1 from '../../assets/404_animation.gif'
 import Lottie from "lottie-react";
 
 const ErrorPage = () => {

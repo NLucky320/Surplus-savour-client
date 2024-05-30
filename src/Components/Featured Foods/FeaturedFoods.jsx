@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import Aos from "aos";
 import "aos/dist/aos.css";
 import Spinner from '../Spinner/Spinner';
@@ -23,11 +23,12 @@ const FeaturedFoods = () => {
     return axiosSecure.get(`/foods?status=Available`).then(response => response.data);
   }
   return (
-    <div>
+    <div >
       {isLoading ? (
         <Spinner />
       ) : (
-        <div>
+          <div
+          >
           <div className="bg-[url('../../assets/wave.svg')] ">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
               <path

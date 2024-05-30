@@ -12,6 +12,8 @@ import ManageMyFood from "../Pages/ManageMyFood/ManageMyFood";
 import UpdateFood from "../Pages/UpdateFood/UpdateFood";
 import MyFoodRequests from "../Pages/MyFoodRequests/MyFoodRequests";
 import ContactUs from "../Pages/ContactUS/ContactUs";
+import AboutUs from "../Pages/AboutUs/AboutUs";
+
 
 
 
@@ -70,7 +72,11 @@ const router = createBrowserRouter([
       {
         path: '/contact-us',
         element:<ContactUs></ContactUs>
-     }
+      },
+      {
+        path: '/about-us',
+        element:<AboutUs></AboutUs>
+      }
 
     ],
   },

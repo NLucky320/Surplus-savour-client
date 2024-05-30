@@ -152,6 +152,25 @@ const Nav = () => {
         className="p-1 font-normal"
       >
         <NavLink
+          to="/about-us"
+       className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-[#f9a06f] border-b-4 font-bold border-[#f9a06f]"
+              : "hover:text-[#f9a06f] font-bold"
+          }
+        >
+     About Us
+        </NavLink>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <NavLink
           to="/contact-us"
        className={({ isActive, isPending }) =>
             isPending

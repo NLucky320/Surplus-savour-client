@@ -2,6 +2,7 @@ import { FaFacebook, FaLinkedin, FaInstagram, FaTwitter } from "react-icons/fa";
 import logo from "../../assets/thanksgiving.png";
 // import "../Footer/Footer.css";
 import moment from "moment";
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div>
@@ -16,6 +17,7 @@ const Footer = () => {
                   </div>
         
           <p>Contact Information - <span> <a href="/contact-us"> Surplus Saver</a></span> </p>
+        
           <p>Copyright © <span>{moment().format("YYYY")}. </span>All right reserved by - Surplus Saver  </p>
           <div className="text-xl mt-2 flex items-center gap-4">
             <a href="https://facebook.com">
@@ -31,6 +33,12 @@ const Footer = () => {
               <FaTwitter/>
             </a>
           </div>
+          {/* <Link
+            to="/?showFeaturedFoods=true">
+              <button className="btn">
+                See More
+              </button>
+            </Link> */}
         </aside>
       </footer>
     </div>

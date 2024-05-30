@@ -55,7 +55,10 @@ const axiosSecure=useAxiosSecure()
     : sortOption === 'desc'
     ? filteredItems.slice().sort((a, b) => new Date(b.expired_date) - new Date(a.expired_date))
     : filteredItems;
-
+  const handleReset = () => {
+    setSearchTerm("");
+    setSortOption("");
+  };
   return (
     <div>
       <Helmet>
@@ -81,6 +84,15 @@ const axiosSecure=useAxiosSecure()
               <option value="desc">Descending</option>
             </select>
             <button
+              className="ml-3 md:ml-8 px-8 py-3 bg-[#f9a06f] text-white rounded mt-4"
+              onClick={handleReset}
+            >
+                Reset
+            </button>
+           
+          </div>
+          <div className='text-center'>
+             <button
               className="ml-3 md:ml-8 px-8 py-3 bg-[#f9a06f] text-white rounded mt-4"
               onClick={toggleLayout}
             >
