@@ -19,7 +19,7 @@ https://assignment-11-648b1.web.app
  - Unauthorized Purchase Prevention: Prevents users from buying their own products, maintaining fairness on the platform.
  - Quantity Restriction Enforcement: Ensures users cannot purchase quantities beyond the available stock, preventing overselling and ensuring accurate inventory management.
  - User-Based Content Deletion Control: Restricts users from deleting posts or orders created by others, preserving data integrity and protecting user-generated content.
- - 
+   
 ### Technologies Used
 -  React Router: Client-side routing for seamless navigation.
 - MongoDB: Flexible and scalable data storage solution.
