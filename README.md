@@ -42,6 +42,6 @@ https://assignment-11-648b1.web.app
 
 #### To run the repository in your local computer please follow the steps below
 - Open your terminal or command prompt.
-- Run the following command with your project repository URL: <pre>`git clone https://github.com/NLucky320/assignment-11-client`</pre> 
+- Run the following command with your project repository URL: <pre>`git clone https://github.com/NLucky320/Surplus-savour-client`</pre> 
 - Install Dependencies in yoour project directory:  <pre>`npm install`</pre>
 - Run the Project: <pre>`npm run dev`</pre> 
