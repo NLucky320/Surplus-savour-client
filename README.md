@@ -10,11 +10,15 @@ https://assignment-11-648b1.web.app
 
 ### Features and Characteristics
  - Context API: Global state management across components.
- -  Sort By Functionality: Enables sorting of data based on specified criteria.
+ - Sort By Functionality: Enables sorting of data based on specified criteria.
  - Private Routes: Protection of authenticated routes.
  - AxiosSecure: Enhanced security for HTTP requests.
  - TanStack Query: State management solution for React applications.
  - Tanstack Mutation: Efficient data manipulation with Tanstack Mutation.
+ - Sharing and Managing Posts: Allows users to share art-related posts and manage their own posts by updating or deleting them.
+ - Unauthorized Purchase Prevention: Prevents users from buying their own products, maintaining fairness on the platform.
+ - Quantity Restriction Enforcement: Ensures users cannot purchase quantities beyond the available stock, preventing overselling and ensuring accurate inventory management.
+ - User-Based Content Deletion Control: Restricts users from deleting posts or orders created by others, preserving data integrity and protecting user-generated content.
  - 
 ### Technologies Used
 -  React Router: Client-side routing for seamless navigation.
